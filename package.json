@@ -1,0 +1,55 @@
+{
+  "name": "redux-first-history",
+  "version": "4.0.0-alpha.1",
+  "description": "Redux First History - Redux 100% SINGLE-AND-ONLY source of truth! - Tested on react-router v4 and reach-router. ",
+  "main": "lib/redux-first-history.js",
+  "scripts": {
+    "compile": "cross-env NODE_ENV=production babel src --out-dir lib",
+    "prepublish": "npm run compile"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/salvoravida/redux-first-history.git"
+  },
+  "keywords": [
+    "redux",
+    "first",
+    "history",
+    "react",
+    "router",
+    "connected",
+    "react-router-redux",
+    "react-router",
+    "connected-react-router"
+  ],
+  "author": "Salvo Ravidà",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/salvoravida/redux-first-history/issues"
+  },
+  "homepage": "https://github.com/salvoravida/redux-first-history#readme",
+  "dependencies": {},
+  "peerDependencies": {
+    "history": "^4.7.2",
+    "redux": "^3.6.0 || ^4.0.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "6.24.1",
+    "babel-eslint": "^8.0.3",
+    "babel-jest": "20.0.3",
+    "babel-loader": "7.0.0",
+    "babel-plugin-import": "^1.2.1",
+    "babel-polyfill": "^6.23.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react-app": "^3.0.0",
+    "babel-runtime": "6.23.0",
+    "cross-env": "^5.1.4",
+    "eslint": "^4.12.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-config-defaults": "^9.0.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.2",
+    "eslint-plugin-react": "^7.5.1"
+  }
+}
