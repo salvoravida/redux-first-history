@@ -26,7 +26,6 @@ Why? Because there is no synchronization! There is only one history: reduxHistor
 
 Demo : https://wy5qw1125l.codesandbox.io/ src: https://codesandbox.io/s/wy5qw1125l
 
----
 
 Installation
 -----------
@@ -90,7 +89,7 @@ export default App;
 * use push action if you need dispatching history from saga or connected components.
 
 # Abstract
----
+
 It's quite common to use in relative big projects
 redux store and react-router declarative routing.
 
@@ -121,7 +120,7 @@ it will always be tunneled to *state.router.location*!
 * optionated and blazing fast  (ok every lib must have these features :D)
 
 # Options
----
+
 ```javascript 1.8
 export const createReduxHistoryContext = ({
   history, routerReducerKey = 'router', oldLocationChangePayload = false, reduxTravelling = false, 
