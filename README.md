@@ -3,7 +3,7 @@
 Redux First History - Make Redux 100% SINGLE-AND-ONLY source of truth again!
 
 ## Main Goal
-*Use whatever you like. History will just work as it must.*
+*Use whatever you like. History will just work as it should.*
 
 ```javascript
 //react-router v4
@@ -88,25 +88,21 @@ const App=() => (
 
 export default App;
 ```
-* just simple Route no more ConnectedRouter!
-* use push action if you need dispatching history from saga or connected components.
+* just simple Router no more ConnectedRouter!
+* use `push` action creator from `redux-first-history` if you need to dispatch location from `saga` or connected components.
+* Probabily, you already did it with `react-router-redux` or `connected-react-router` (in this case you have only to replace import!) 
 
 # Abstract
 
-It's quite common to use in relative big projects
-redux store and react-router declarative routing.
+Working with *relatively large* projects, it's quite common to use both `redux` and `react-router`.
 
-So you may have components that take location from store,
-others that take location from router context, and others from withRouter HOC.
-If you are on a crazy project, you could see also connect(withRouter) or
-withRouter(connect) ....
+So you may have components that take location from store, others that take location from router context, and others from withRouter HOC. If you are on a crazy project, you could see also connect(withRouter) or withRouter(connect) ....
 
-This sometimes could generate sync issue, when many
-components are updated at different time,
-and also React shallowCompare optimization will not work as could.
+This sometimes could generate sync issue, because many components are updated at different time.
+In addition, React shallowCompare rendering optimization will not work as it should.
 
-with Redux First History, you can mix components that get history from whatever, 
-it will always be tunneled to *state.router.location*!
+With `redux-first-history`, you can mix components that get history from whatever, 
+they will always be tunneled to *state.router.location* !
 
 # Main features
  
