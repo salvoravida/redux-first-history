@@ -24,8 +24,11 @@ Why? Because there is no synchronization! There is only one history: reduxHistor
 * one source of truth
 * no more location issue!
 
-Demo : https://wy5qw1125l.codesandbox.io/ src: https://codesandbox.io/s/wy5qw1125l
+<p align="center">
+<img alt="Edit Redux-First Router Demo" src="https://i.postimg.cc/HnxxYzmz/Untitled_Diagram.png">
+</p>
 
+Demo : https://wy5qw1125l.codesandbox.io/ src: https://codesandbox.io/s/wy5qw1125l
 
 Installation
 -----------
