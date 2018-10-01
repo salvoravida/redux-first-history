@@ -1,7 +1,7 @@
 {
   "name": "redux-first-history",
-  "version": "4.0.0-alpha.1",
-  "description": "Redux First History - Redux 100% SINGLE-AND-ONLY source of truth! - Tested on react-router v4 and reach-router. ",
+  "version": "4.0.0-alpha.6",
+  "description": "Redux First History - Make Redux 100% SINGLE-AND-ONLY source of truth again! - Tested on react-router v4 and reach-router.",
   "main": "lib/redux-first-history.js",
   "scripts": {
     "compile": "cross-env NODE_ENV=production babel src --out-dir lib",
@@ -12,6 +12,7 @@
     "url": "git+https://github.com/salvoravida/redux-first-history.git"
   },
   "keywords": [
+    "redux-first-history",
     "redux",
     "first",
     "history",
@@ -20,9 +21,10 @@
     "connected",
     "react-router-redux",
     "react-router",
-    "connected-react-router"
+    "connected-react-router",
+    "@reach/router"
   ],
-  "author": "Salvo Ravidà",
+  "author": "Salvatore Ravidà",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/salvoravida/redux-first-history/issues"
