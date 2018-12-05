@@ -19,4 +19,4 @@ export interface IHistoryContext {
 export function createReduxHistoryContext(
   options: IHistoryContextOptions
 ): IHistoryContext;
-export const push: Action;
+export const push: (to: string) => Action;
