@@ -107,7 +107,7 @@ export const createReduxHistoryContext = ({
     return store.subscribe(() => {
       const sLoc = store.getState()[routerReducerKey].location;
       const hLoc = history.location;
-      if (!locationEqual(sLoc, hLoc)) {
+      if (sLoc && hLoc && !locationEqual(sLoc, hLoc)) {
         isReduxTravelling = true;
         history.push({ pathname: sLoc.pathname, search: sLoc.search, hash: sLoc.hash });
       }
@@ -130,6 +130,9 @@ export const createReduxHistoryContext = ({
     history.listen((location, action) => {
       if (isReduxTravelling) {
         isReduxTravelling = false;
+        //notify registered callback travelling
+        const state = store.getState();
+        registeredCallback.forEach(c => c(state[routerReducerKey].location, state[routerReducerKey].action));
         return;
       }
       store.dispatch(locationChangeAction(location, action));
