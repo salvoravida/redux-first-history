@@ -30,9 +30,7 @@
     "url": "https://github.com/salvoravida/redux-first-history/issues"
   },
   "homepage": "https://github.com/salvoravida/redux-first-history#readme",
-  "dependencies": {
-    "type-zoo": "^3.2.1"
-  },
+  "dependencies": {},
   "peerDependencies": {
     "history": "^4.7.2",
     "redux": "^3.6.0 || ^4.0.0"
@@ -54,6 +52,7 @@
     "eslint-config-defaults": "^9.0.0",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jsx-a11y": "^6.0.2",
-    "eslint-plugin-react": "^7.5.1"
+    "eslint-plugin-react": "^7.5.1",
+    "type-zoo": "^3.2.1"
   }
 }
