@@ -1,7 +1,7 @@
 import { History } from "history";
 import { Action, Middleware, Reducer, Store } from "redux";
 
-declare function createReduxHistory(store: Store): History;
+declare function createReduxHistory(store: any): History;
 
 export interface IHistoryContextOptions {
   history: History;
