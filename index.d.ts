@@ -1,8 +1,7 @@
 import { History } from "history";
 import { Action, Middleware, Reducer, Store } from "redux";
-import { Overwrite } from "type-zoo/types";
 
-declare function createReduxHistory(store: Overwrite<Store, any>): History;
+declare function createReduxHistory(store: Store): History;
 
 export interface IHistoryContextOptions {
   history: History;
