@@ -3,6 +3,13 @@ import { Action, Middleware, Reducer, Store } from "redux";
 
 declare function createReduxHistory(store: Store): History;
 
+export interface IrrHistory {
+  _onTransitionComplete: () => void;
+  listen: (listener: any) => any;
+  navigate: (to: any, ...args: any[]) => any;
+}
+declare function reachify(reduxHistory: History<any>): IrrHistory;
+
 export interface IHistoryContextOptions {
   history: History;
   routerReducerKey?: string;
