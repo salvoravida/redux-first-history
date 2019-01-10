@@ -1,4 +1,5 @@
 import { History } from "history";
+import { History as reachHistory } from "@reach/router";
 import { Action, Middleware, Reducer, Store } from "redux";
 
 declare function createReduxHistory(store: Store): History;
@@ -8,7 +9,7 @@ export interface IrrHistory {
   listen: (listener: any) => any;
   navigate: (to: any, ...args: any[]) => any;
 }
-declare function reachify(reduxHistory: History<any>): IrrHistory;
+declare function reachify(reduxHistory: History<any>): reachHistory;
 
 export interface IHistoryContextOptions {
   history: History;
@@ -23,7 +24,5 @@ export interface IHistoryContext {
   routerReducer: Reducer;
 }
 
-export function createReduxHistoryContext(
-  options: IHistoryContextOptions
-): IHistoryContext;
+export function createReduxHistoryContext(options: IHistoryContextOptions): IHistoryContext;
 export const push: (to: string) => Action;
