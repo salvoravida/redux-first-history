@@ -19,9 +19,9 @@ this.props.location === state.router.location
 
 You can mix redux, redux-saga, react-router & @reach/router 
 without any synchronization issue! <br>
-Why? Because there is no synchronization! There is only one history: reduxHistory!
+Why? Because there is no synchronization at all! There is only one history: reduxHistory!
 * one way data-flow
-* one source of truth
+* one unique source of truth
 * no more location issue!
 
 <p align="center">
@@ -88,35 +88,35 @@ const App=() => (
 
 export default App;
 ```
-* just simple Router no more ConnectedRouter!
+* just simple Router with no more ConnectedRouter!
 * use `push` action creator from `redux-first-history` if you need to dispatch location from `saga` or connected components.
-* Probabily, you already did it with `react-router-redux` or `connected-react-router` (in this case you have only to replace import!) 
+* Probably, you already did it with `react-router-redux` or `connected-react-router` (in this case you have only to replace the import!) 
 
 # Abstract
 
-Working with *relatively large* projects, it's quite common to use both `redux` and `react-router`.
+While working with *relatively large* projects, it's quite common to use both `redux` and `react-router`.
 
-So you may have components that take location from store, others that take location from router context, and others from withRouter HOC. If you are on a crazy project, you could see also connect(withRouter) or withRouter(connect) ....
+So you may have components that take location from store, others that take location from router context, and others from withRouter HOC. If you are on a big crazy already-messed-up project, you could see also connect(withRouter) or withRouter(connect) ....
 
-This sometimes could generate sync issue, because many components are updated at different time.
+This sometimes could generate sync issue, due to the fact that many components are updated at different time.
 In addition, React shallowCompare rendering optimization will not work as it should.
 
-With `redux-first-history`, you can mix components that get history from whatever, 
+With `redux-first-history`, you can mix components that get history from wherever, 
 they will always be tunneled to *state.router.location* !
 
 # Main features
  
 * 100% one source of truth (store)
 * No syncronization depending on rendering lifecicle (ConnectedRouter)
-* No React dependance (we want history in store always!)
+* No React dependency (we want history to be always in store!)
 * 100% one-way data flow (only dispatch actions!)
 * improve React shallowCompare as there is only one "location"
 * support react-router v4
 * support @reach/router 1.2.1
 * support mix react-router & @reach-router in the same app.
-* fast migration existing project, with same LOCATION_CHANGE and push actions (taken from RRR)
-* handle Redux Travelling from devTools (that's non sense in production, but if you need ...) 
-* optionated and blazing fast  (ok every lib must have these features :D)
+* fast migration from existing project, with same `LOCATION_CHANGE` and push actions (taken from RRR)
+* handle Redux Travelling from devTools (that's a non sense in production, but at the end of the day this decision it's up to you ...) 
+* custom opions and blazing fast  (ok, every lib should have these features, that's true :D)
 
 # Options
 
@@ -128,24 +128,24 @@ export const createReduxHistoryContext = ({
 
 |key	| optional |description   	| 
 |---	|---|---	|
-|history	| no| "history/createBrowserHistory" object - currently tested only with version 4.7.2  	| 
-|routerReducerKey | yes | if you do not like "router" name for reducer.
-|oldLocationChangePayload | yes | if you use old LOCATION_CHANGE payload { ...location } instead of new { location}, by setting this flag you do not have to change your app!.
+|history	| no| The `history/createBrowserHistory` object - currently tested only with version 4.7.2  	| 
+|routerReducerKey | yes | if you don't like `router` name for reducer.
+|oldLocationChangePayload | yes | if you use the old`LOCATION_CHANGE`payload`{ ...location }`instead of the new`{ location}`, setting this flag will make you able to not change your app at all!
 |reduxTravelling | yes | if you want to play with redux-dev-tools :D.
 
 # Feedback
 
-Let me know what do you think about! <br>
+Let me know what do you think! <br>
 *Enjoy it? Star this project!* :D
 
 # Todo
 * test, test and test!
 * code clean and split
-* best compile with rollup
-* warning for uncorrect use
-* typescript
-* try use with non-react-like other framework!
-* redux-first-app poc 
+* a better way to compile with rollup
+* warning for uncorrect usage
+* typescript support
+* try to use it with non-react-like other framework!
+* redux-first-app POC
 
 any idea? let me know and contribute!
 
