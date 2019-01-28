@@ -114,7 +114,7 @@ they will always be tunneled to *state.router.location* !
 * support react-router v4
 * support @reach/router 1.2.1
 * support mix react-router & @reach-router in the same app.
-* fast migration from existing project, with same LOCATION_CHANGE and push actions (taken from RRR)
+* fast migration from existing project, with same `LOCATION_CHANGE` and push actions (taken from RRR)
 * handle Redux Travelling from devTools (that's a non sense in production, but at the end of the day this decision it's up to you ...) 
 * custom opions and blazing fast  (ok, every lib should have these features, that's true :D)
 
@@ -128,8 +128,8 @@ export const createReduxHistoryContext = ({
 
 |key	| optional |description   	| 
 |---	|---|---	|
-|history	| no| The `"history/createBrowserHistory"` object - currently tested only with version 4.7.2  	| 
-|routerReducerKey | yes | if you don't like "router" name for reducer.
+|history	| no| The `history/createBrowserHistory` object - currently tested only with version 4.7.2  	| 
+|routerReducerKey | yes | if you don't like `router` name for reducer.
 |oldLocationChangePayload | yes | if you use the old`LOCATION_CHANGE`payload`{ ...location }`instead of the new`{ location}`, setting this flag will make you able to not change your app at all!
 |reduxTravelling | yes | if you want to play with redux-dev-tools :D.
 
@@ -144,7 +144,7 @@ Let me know what do you think! <br>
 * a better way to compile with rollup
 * warning for uncorrect usage
 * typescript support
-* try to use with non-react-like other framework!
+* try to use it with non-react-like other framework!
 * redux-first-app POC
 
 any idea? let me know and contribute!
