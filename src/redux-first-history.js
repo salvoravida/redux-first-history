@@ -59,9 +59,18 @@ export const goForward = updateLocation('goForward');
 /*************************************************  CONTEXT  **********************************************************/
 
 export const createReduxHistoryContext = ({
-  history, routerReducerKey = 'router', oldLocationChangePayload = false, reduxTravelling = false, showHistoryAction = false,
+  history,
+  routerReducerKey = 'router',
+  oldLocationChangePayload = false,
+  reduxTravelling = false,
+  showHistoryAction = false,
+  selectRouterState = null,
 }) => {
   /**********************************************  REDUX REDUCER ******************************************************/
+
+  if (typeof selectRouterState !== 'function') {
+    selectRouterState = state => state[routerReducerKey];
+  }
 
   const locationChangeAction = (location, action) => ({
     type: LOCATION_CHANGE,
@@ -105,7 +114,7 @@ export const createReduxHistoryContext = ({
     const locationEqual = (loc1, loc2) => (loc1.pathname === loc2.pathname && loc1.search === loc2.search && loc1.hash === loc2.hash);
 
     return store.subscribe(() => {
-      const sLoc = store.getState()[routerReducerKey].location;
+      const sLoc = selectRouterState(store.getState()).location;
       const hLoc = history.location;
       if (sLoc && hLoc && !locationEqual(sLoc, hLoc)) {
         isReduxTravelling = true;
@@ -131,13 +140,13 @@ export const createReduxHistoryContext = ({
       if (isReduxTravelling) {
         isReduxTravelling = false;
         //notify registered callback travelling
-        const state = store.getState();
-        registeredCallback.forEach(c => c(state[routerReducerKey].location, state[routerReducerKey].action));
+        const routerState = selectRouterState(store.getState());
+        registeredCallback.forEach(c => c(routerState.location, routerState.action));
         return;
       }
       store.dispatch(locationChangeAction(location, action));
-      const state = store.getState();
-      registeredCallback.forEach(c => c(state[routerReducerKey].location, state[routerReducerKey].action));
+      const routerState = selectRouterState(store.getState());
+      registeredCallback.forEach(c => c(routerState.location, routerState.action));
     });
 
     const reduxFirstHistory = {
@@ -162,14 +171,14 @@ export const createReduxHistoryContext = ({
     //location tunnel
     Object.defineProperty(reduxFirstHistory, 'location', {
       get() {
-        return store.getState()[routerReducerKey].location;
+        return selectRouterState(store.getState()).location;
       },
     });
 
     //action tunnel
     Object.defineProperty(reduxFirstHistory, 'action', {
       get() {
-        return store.getState()[routerReducerKey].action;
+        return selectRouterState(store.getState()).action;
       },
     });
 
