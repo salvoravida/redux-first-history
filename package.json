@@ -1,6 +1,6 @@
 {
   "name": "redux-first-history",
-  "version": "4.0.0-alpha.7",
+  "version": "4.0.1",
   "description": "Redux First History - Make Redux 100% SINGLE-AND-ONLY source of truth again! - Tested on react-router v4 and reach-router.",
   "main": "lib/redux-first-history.js",
   "scripts": {
@@ -48,10 +48,8 @@
     "babel-runtime": "6.23.0",
     "cross-env": "^5.1.4",
     "eslint": "^4.12.1",
-    "eslint-config-airbnb": "^16.1.0",
+    "eslint-config-airbnb": "^17.1.0",
     "eslint-config-defaults": "^9.0.0",
-    "eslint-plugin-import": "^2.8.0",
-    "eslint-plugin-jsx-a11y": "^6.0.2",
-    "eslint-plugin-react": "^7.5.1"
+    "eslint-plugin-import": "^2.17.2"
   }
 }
