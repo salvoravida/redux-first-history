@@ -54,7 +54,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import { createReduxHistoryContext, reachify } from "redux-first-history";
 import createHistory from "history/createBrowserHistory";
 
-const {  createReduxHistory,  routerMiddleware, routerReducer} = createReduxHistoryContext({ 
+const { createReduxHistory, routerMiddleware, routerReducer } = createReduxHistoryContext({ 
   history: createHistory(),
   //others options if needed 
 });
@@ -152,7 +152,6 @@ Let me know what do you think! <br>
 * code clean and split
 * a better way to compile with rollup
 * warning for uncorrect usage
-* typescript support
 * try to use it with non-react-like other framework!
 * redux-first-app POC
 
