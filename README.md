@@ -122,7 +122,11 @@ they will always be tunneled to *state.router.location* !
 
 ```javascript 1.8
 export const createReduxHistoryContext = ({
-  history, routerReducerKey = 'router', oldLocationChangePayload = false, reduxTravelling = false, 
+  history, 
+  routerReducerKey = 'router', 
+  oldLocationChangePayload = false, 
+  reduxTravelling = false, 
+  selectRouterState = null
 })
 ```
 
@@ -132,6 +136,7 @@ export const createReduxHistoryContext = ({
 |routerReducerKey | yes | if you don't like `router` name for reducer.
 |oldLocationChangePayload | yes | if you use the old`LOCATION_CHANGE`payload`{ ...location }`instead of the new`{ location}`, setting this flag will make you able to not change your app at all!
 |reduxTravelling | yes | if you want to play with redux-dev-tools :D.
+|selectRouterState |yes | custom selector for router state. With redux-immutable selectRouterState = state => state.get("router") 
 
 # Feedback
 
