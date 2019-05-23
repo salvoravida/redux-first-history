@@ -1,6 +1,6 @@
-import { History } from "history";
+import { History, Location, Action as RouterActionType } from "history";
 import { History as reachHistory } from "@reach/router";
-import { Action, Middleware, Reducer, Store } from "redux";
+import { Action as ReduxAction, Middleware, Reducer, Store } from "redux";
 
 declare function createReduxHistory(store: Store): History;
 
@@ -29,11 +29,16 @@ export function createReduxHistoryContext(options: IHistoryContextOptions): IHis
 
 export function reachify(reduxHistory: History<any>): reachHistory;
 
-export const push: (to: any) => Action;
-export const replace : (to: any) => Action;
-export const go : (to: any) => Action;
-export const goBack  : (to: any) => Action;
-export const goForward  : (to: any) => Action;
+export const push: (to: any) => ReduxAction;
+export const replace : (to: any) => ReduxAction;
+export const go : (to: any) => ReduxAction;
+export const goBack  : (to: any) => ReduxAction;
+export const goForward  : (to: any) => ReduxAction;
+
+export interface RouterState {
+  location: Location;
+  action: RouterActionType;
+}
 
 export const CALL_HISTORY_METHOD = '@@router/CALL_HISTORY_METHOD';
 export const LOCATION_CHANGE = '@@router/LOCATION_CHANGE';
