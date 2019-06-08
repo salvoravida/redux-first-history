@@ -36,22 +36,20 @@
     "redux": "^3.6.0 || ^4.0.0"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-core": "6.24.1",
-    "babel-eslint": "^8.0.3",
-    "babel-jest": "20.0.3",
-    "babel-loader": "7.0.0",
-    "babel-plugin-import": "^1.2.1",
-    "babel-polyfill": "^6.23.0",
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-react-app": "^3.0.0",
-    "babel-runtime": "6.23.0",
-    "cross-env": "^5.1.4",
-    "eslint": "^4.12.1",
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.5",
+    "@babel/polyfill": "^7.4.4",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/runtime-corejs2": "^7.4.5",
+    "cross-env": "^5.2.0",
+    "eslint": "^5.16.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-defaults": "^9.0.0",
-    "eslint-plugin-import": "^2.17.2",
+    "eslint-plugin-import": "^2.17.3",
+    "eslint-plugin-react": "^7.13.0",
     "eslint-plugin-jsx-a11y": "^6.2.1",
-    "eslint-plugin-react": "^7.13.0"
+    "history": "^4.9.0",
+    "redux": "^4.0.1"
   }
 }
