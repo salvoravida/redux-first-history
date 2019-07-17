@@ -10,7 +10,7 @@ Redux First History - Make Redux 100% SINGLE-AND-ONLY source of truth again!
 *Use whatever you like. History will just work as it should.*
 
 ```javascript
-//react-router v4
+//react-router v4 - v5
 this.context.router.history.location === state.router.location
 this.context.route.location === state.router.location
 this.props.history.location === state.router.location
@@ -115,7 +115,7 @@ they will always be tunneled to *state.router.location* !
 * No React dependency (we want history to be always in store!)
 * 100% one-way data flow (only dispatch actions!)
 * improve React shallowCompare as there is only one "location"
-* support react-router v4
+* support react-router v4 and v5
 * support @reach/router 1.2.1
 * support mix react-router & @reach-router in the same app.
 * fast migration from existing project, with same `LOCATION_CHANGE` and push actions (taken from RRR)
@@ -136,9 +136,9 @@ export const createReduxHistoryContext = ({
 
 |key	| optional |description   	| 
 |---	|---|---	|
-|history	| no| The `history/createBrowserHistory` object - currently tested only with version 4.7.2  	| 
+|history	| no| The `history/createBrowserHistory` object - currently tested only with version 4.7.2 and 4.9.0  	| 
 |routerReducerKey | yes | if you don't like `router` name for reducer.
-|oldLocationChangePayload | yes | if you use the old`LOCATION_CHANGE`payload`{ ...location }`instead of the new`{ location}`, setting this flag will make you able to not change your app at all!
+|oldLocationChangePayload | yes | if you use the old`LOCATION_CHANGE`payload`{ ...location }`instead of the new`{ location }`, setting this flag will make you able to not change your app at all!
 |reduxTravelling | yes | if you want to play with redux-dev-tools :D.
 |selectRouterState |yes | custom selector for router state. With redux-immutable selectRouterState = state => state.get("router") 
 
