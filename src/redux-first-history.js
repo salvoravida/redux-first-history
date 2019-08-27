@@ -5,6 +5,7 @@ export const reachify = (reduxHistory) => {
   let resolveTransition = () => {};
 
   const rrHistory = {
+    // eslint-disable-next-line no-underscore-dangle
     _onTransitionComplete() {
       transitioning = false;
       resolveTransition();
@@ -21,7 +22,7 @@ export const reachify = (reduxHistory) => {
         reduxHistory.push({ pathname: to, state, key: `${Date.now()}` });
       }
       transitioning = true;
-      return new Promise(res => (resolveTransition = res));
+      return new Promise((res) => (resolveTransition = res));
     },
   };
 
@@ -45,7 +46,7 @@ export const reachify = (reduxHistory) => {
 export const CALL_HISTORY_METHOD = '@@router/CALL_HISTORY_METHOD';
 export const LOCATION_CHANGE = '@@router/LOCATION_CHANGE';
 
-const updateLocation = method => (...args) => ({
+const updateLocation = (method) => (...args) => ({
   type: CALL_HISTORY_METHOD,
   payload: { method, args },
 });
@@ -69,7 +70,7 @@ export const createReduxHistoryContext = ({
   /**********************************************  REDUX REDUCER ******************************************************/
 
   if (typeof selectRouterState !== 'function') {
-    selectRouterState = state => state[routerReducerKey];
+    selectRouterState = (state) => state[routerReducerKey];
   }
 
   const locationChangeAction = (location, action) => ({
@@ -141,12 +142,12 @@ export const createReduxHistoryContext = ({
         isReduxTravelling = false;
         //notify registered callback travelling
         const routerState = selectRouterState(store.getState());
-        registeredCallback.forEach(c => c(routerState.location, routerState.action));
+        registeredCallback.forEach((c) => c(routerState.location, routerState.action));
         return;
       }
       store.dispatch(locationChangeAction(location, action));
       const routerState = selectRouterState(store.getState());
-      registeredCallback.forEach(c => c(routerState.location, routerState.action));
+      registeredCallback.forEach((c) => c(routerState.location, routerState.action));
     });
 
     const reduxFirstHistory = {
@@ -163,7 +164,7 @@ export const createReduxHistoryContext = ({
           registeredCallback.push(callback);
         }
         return () => {
-          registeredCallback = registeredCallback.filter(c => c !== callback);
+          registeredCallback = registeredCallback.filter((c) => c !== callback);
         };
       },
     };

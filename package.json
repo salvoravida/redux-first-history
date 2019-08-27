@@ -1,6 +1,6 @@
 {
   "name": "redux-first-history",
-  "version": "4.0.4",
+  "version": "4.0.5",
   "description": "Redux First History - Make Redux 100% SINGLE-AND-ONLY source of truth again! - Tested on react-router v4 and reach-router.",
   "main": "lib/redux-first-history.js",
   "scripts": {
@@ -37,20 +37,18 @@
     "redux": "^3.6.0 || ^4.0.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.5.0",
-    "@babel/core": "^7.5.4",
-    "@babel/polyfill": "^7.4.4",
-    "@babel/preset-env": "^7.5.4",
-    "@babel/preset-react": "^7.0.0",
-    "@babel/runtime-corejs2": "^7.5.4",
-    "cross-env": "^5.2.0",
-    "eslint": "^5.16.0",
-    "eslint-config-airbnb": "^17.1.1",
-    "eslint-config-defaults": "^9.0.0",
-    "eslint-plugin-import": "^2.18.0",
-    "eslint-plugin-react": "^7.14.2",
-    "eslint-plugin-jsx-a11y": "^6.2.3",
-    "history": "^4.9.0",
-    "redux": "^4.0.1"
+    "@babel/cli": "7.5.5",
+    "@babel/core": "7.5.5",
+    "@babel/preset-env": "7.5.5",
+    "@reach/router": "1.2.1",
+    "cross-env": "5.2.0",
+    "eslint": "6.2.2",
+    "eslint-config-airbnb": "18.0.1",
+    "eslint-config-defaults": "9.0.0",
+    "eslint-plugin-import": "2.18.2",
+    "eslint-plugin-jsx-a11y": "6.2.3",
+    "eslint-plugin-react": "7.14.3",
+    "history": "4.9.0",
+    "redux": "4.0.4"
   }
 }
