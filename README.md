@@ -3,8 +3,12 @@
   <a href="https://www.npmjs.com/package/redux-first-history"><img src="https://img.shields.io/npm/v/redux-first-history.svg?style=flat-square"></a>
   <a href="https://www.npmjs.com/package/redux-first-history"><img src="https://img.shields.io/npm/dm/redux-first-history.svg?style=flat-square"></a>
 </p>
-Redux First History - Make Redux 100% SINGLE-AND-ONLY source of truth again!
 
+Redux First History - Redux history binding support `react-router` &  `@reach/router`.<br>
+Compatible with `immer` - `redux-immer` - `redux-immutable`.
+
+Just smaller, faster and issue-free than 
+[`connected-react-router`](https://github.com/supasate/connected-react-router/issues)
 
 ## Main Goal
 *Use whatever you like. History will just work as it should.*
@@ -33,6 +37,20 @@ Why? Because there is no synchronization at all! There is only one history: redu
 </p>
 
 Demo : https://wy5qw1125l.codesandbox.io/ src: https://codesandbox.io/s/wy5qw1125l
+
+# Main features
+ 
+* 100% one source of truth (store)
+* No syncronization depending on rendering lifecicle (ConnectedRouter)
+* No React dependency (we want history to be always in store!)
+* 100% one-way data flow (only dispatch actions!)
+* improve React shallowCompare as there is only one "location"
+* support react-router v4 and v5
+* support @reach/router 1.2.1
+* support mix react-router & @reach-router in the same app.
+* fast migration from existing project, with same `LOCATION_CHANGE` and push actions (taken from RRR)
+* handle Redux Travelling from devTools (that's a non sense in production, but at the end of the day this decision it's up to you ...) 
+* custom opions and blazing fast  (ok, every lib should have these features, that's true :D)
 
 Installation
 -----------
@@ -107,20 +125,6 @@ In addition, React shallowCompare rendering optimization will not work as it sho
 
 With `redux-first-history`, you can mix components that get history from wherever, 
 they will always be tunneled to *state.router.location* !
-
-# Main features
- 
-* 100% one source of truth (store)
-* No syncronization depending on rendering lifecicle (ConnectedRouter)
-* No React dependency (we want history to be always in store!)
-* 100% one-way data flow (only dispatch actions!)
-* improve React shallowCompare as there is only one "location"
-* support react-router v4 and v5
-* support @reach/router 1.2.1
-* support mix react-router & @reach-router in the same app.
-* fast migration from existing project, with same `LOCATION_CHANGE` and push actions (taken from RRR)
-* handle Redux Travelling from devTools (that's a non sense in production, but at the end of the day this decision it's up to you ...) 
-* custom opions and blazing fast  (ok, every lib should have these features, that's true :D)
 
 # Options
 
