@@ -4,10 +4,15 @@
   <a href="https://www.npmjs.com/package/redux-first-history"><img src="https://img.shields.io/npm/dm/redux-first-history.svg?style=flat-square"></a>
 </p>
 
-Redux First History - Redux history binding support `react-router` &  `@reach/router`.<br>
+Redux First History - Redux history binding for
+* [`react-router`](https://github.com/ReactTraining/react-router)
+* [`@reach/router`](https://github.com/reach/router)
+* [`wouter`](https://github.com/molefrog/wouter)
+* mix `react-router` - `@reach-router` - `wouter` in the same app!! Demo : https://wy5qw1125l.codesandbox.io/.
+
 Compatible with `immer` - `redux-immer` - `redux-immutable`.
 
-Just smaller, faster and issue-free than 
+:tada: A smaller, faster, optionated, issue-free alternative to 
 [`connected-react-router`](https://github.com/supasate/connected-react-router/issues)
 
 ## Main Goal
@@ -23,9 +28,12 @@ withRouter.props.location === state.router.location
 
 //@reach/router
 this.props.location === state.router.location
+
+//wouter - pathname
+useLocation()[0] === state.router.location.pathname
 ```
 
-You can mix redux, redux-saga, react-router & @reach/router 
+You can mix redux, redux-saga, react-router, @reach/router & wouter
 without any synchronization issue! <br>
 Why? Because there is no synchronization at all! There is only one history: reduxHistory!
 * one way data-flow
@@ -47,7 +55,8 @@ Demo : https://wy5qw1125l.codesandbox.io/ src: https://codesandbox.io/s/wy5qw112
 * improve React shallowCompare as there is only one "location"
 * support react-router v4 and v5
 * support @reach/router 1.2.1
-* support mix react-router & @reach-router in the same app.
+* support @wouter 2.x
+* support mix react-router, @reach-router & wouter in the same app!
 * fast migration from existing project, with same `LOCATION_CHANGE` and push actions (taken from RRR)
 * handle Redux Travelling from devTools (that's a non sense in production, but at the end of the day this decision it's up to you ...) 
 * custom opions and blazing fast  (ok, every lib should have these features, that's true :D)
@@ -70,6 +79,7 @@ store.js
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { createReduxHistoryContext, reachify } from "redux-first-history";
+import { createWouterHook } from "redux-first-history/wouter";
 import createHistory from "history/createBrowserHistory";
 
 const { createReduxHistory, routerMiddleware, routerReducer } = createReduxHistoryContext({ 
@@ -90,6 +100,8 @@ export const store = createStore(
 export const history = createReduxHistory(store);
 //if you use @reach/router 
 export const reachHistory = reachify(history);
+//if you use wouter
+export const wouterUseLocation = createWouterHook(history);
 ```
 
 app.js 
@@ -100,7 +112,7 @@ import { push } from "redux-first-history";
 import { Router } from "react-router-dom";
 import { store, history } from "./store";
 
-const App=() => (
+const App = () => (
       <Provider store={store}>
         <Router history={history}>
         //.....
