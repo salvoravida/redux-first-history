@@ -1,6 +1,6 @@
 {
   "name": "redux-first-history",
-  "version": "4.1.0",
+  "version": "4.1.1",
   "description": "Redux First History - Make Redux 100% SINGLE-AND-ONLY source of truth again! - Tested on react-router v4 and reach-router.",
   "main": "lib/redux-first-history.js",
   "scripts": {

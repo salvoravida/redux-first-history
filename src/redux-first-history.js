@@ -151,6 +151,7 @@ export const createReduxHistoryContext = ({
     });
 
     const reduxFirstHistory = {
+      block: history.block,
       createHref: history.createHref,
       push: (...args) => store.dispatch(push(...args)),
       replace: (...args) => store.dispatch(replace(...args)),
