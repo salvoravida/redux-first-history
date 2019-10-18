@@ -1,10 +1,11 @@
 # redux-first-history
 <p align="center">
   <a href="https://www.npmjs.com/package/redux-first-history"><img src="https://img.shields.io/npm/v/redux-first-history.svg?style=flat-square"></a>
-  <a href="https://www.npmjs.com/package/redux-first-history"><img src="https://img.shields.io/npm/dm/redux-first-history.svg?style=flat-square"></a>
+  <a href="https://www.npmjs.com/package/redux-first-history"><img src="https://img.shields.io/npm/dt/redux-first-history.svg?style=flat-square"></a><br/>
+  Redux First History - Make Redux 100% SINGLE-AND-ONLY source of truth!
 </p>
 
-Redux First History - Redux history binding for
+Redux history binding for
 * [`react-router`](https://github.com/ReactTraining/react-router)
 * [`@reach/router`](https://github.com/reach/router)
 * [`wouter`](https://github.com/molefrog/wouter)
