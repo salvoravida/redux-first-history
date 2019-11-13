@@ -66,7 +66,7 @@ export const createReduxHistoryContext = ({
   reduxTravelling = false,
   showHistoryAction = false,
   selectRouterState = null,
-  numLocationChangesToTrack = 0
+  savePreviousLocations = 0
 }) => {
   /**********************************************  REDUX REDUCER ******************************************************/
 
@@ -84,14 +84,23 @@ export const createReduxHistoryContext = ({
     action: null
   };
 
+  const numLocationToTrack = isNaN(savePreviousLocations) ? 0 : savePreviousLocations;
+  if (numLocationToTrack) initialState.previousLocations = [];
+
   const routerReducer = (state = initialState, { type, payload } = {}) => {
     if (type === LOCATION_CHANGE) {
       if (oldLocationChangePayload) {
         const { action, ...location } = payload || {};
-        return { ...state, location, action };
+        const previousLocations = numLocationToTrack
+          ? [{ location, action }, ...state.previousLocations.slice(0, numLocationToTrack)]
+          : undefined;
+        return { ...state, location, action, previousLocations };
       }
       const { location, action } = payload || {};
-      return { ...state, location, action };
+      const previousLocations = numLocationToTrack
+        ? [{ location, action }, ...state.previousLocations.slice(0, numLocationToTrack)]
+        : undefined;
+      return { ...state, location, action, previousLocations };
     }
     return state;
   };

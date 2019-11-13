@@ -147,18 +147,19 @@ export const createReduxHistoryContext = ({
   routerReducerKey = 'router', 
   oldLocationChangePayload = false, 
   reduxTravelling = false, 
-  selectRouterState = null
+  selectRouterState = null,
+  savePreviousLocations = 0
 })
 ```
 
 |key	| optional |description   	| 
 |---	|---|---	|
-|history	| no| The `history/createBrowserHistory` object - currently tested only with version 4.7.2 and 4.9.0  	| 
+|history	| no| The `history/createBrowserHistory` object - currently tested only with version 4.7.2 - 4.10.1  	| 
 |routerReducerKey | yes | if you don't like `router` name for reducer.
 |oldLocationChangePayload | yes | if you use the old`LOCATION_CHANGE`payload`{ ...location }`instead of the new`{ location }`, setting this flag will make you able to not change your app at all!
 |reduxTravelling | yes | if you want to play with redux-dev-tools :D.
 |selectRouterState |yes | custom selector for router state. With redux-immutable selectRouterState = state => state.get("router") 
-
+|savePreviousLocations |yes | if > 0 add the key "previousLocation" to state.router, with the last N locations. [{location,action}, ...]
 # Feedback
 
 Let me know what do you think! <br>
@@ -167,7 +168,6 @@ Let me know what do you think! <br>
 # Todo
 * test, test and test!
 * code clean and split
-* a better way to compile with rollup
 * warning for uncorrect usage
 * try to use it with non-react-like other framework!
 * redux-first-app POC
