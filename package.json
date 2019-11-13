@@ -1,7 +1,7 @@
 {
   "name": "redux-first-history",
   "version": "4.2.0",
-  "description": "Redux First History - Make Redux 100% SINGLE-AND-ONLY source of truth again! - Tested on react-router v4 and reach-router.",
+  "description": "Redux First History - Redux history binding support react-router - @reach/router - wouter",
   "main": "lib/index.js",
   "module": "lib/index.esm.js",
   "types": "lib/index.d.ts",
