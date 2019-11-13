@@ -1,3 +1,8 @@
 node_modules/*
 .idea/*
 src/
+.eslintignore
+.eslintrc.json
+.prettierrc.js
+rollup.config.js
+
