@@ -1,5 +1,5 @@
 import { History, Location, Action as RouterActionType } from "history";
-import { History as reachHistory } from "@reach/router";
+import { History as reachHistory } from "reach__router";
 import { Action as ReduxAction, Middleware, Reducer, Store } from "redux";
 
 declare function createReduxHistory(store: Store): History;
