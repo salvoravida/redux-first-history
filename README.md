@@ -148,7 +148,8 @@ export const createReduxHistoryContext = ({
   oldLocationChangePayload = false, 
   reduxTravelling = false, 
   selectRouterState = null,
-  savePreviousLocations = 0
+  savePreviousLocations = 0,
+  batch = null
 })
 ```
 
@@ -160,6 +161,8 @@ export const createReduxHistoryContext = ({
 |reduxTravelling | yes | if you want to play with redux-dev-tools :D.
 |selectRouterState |yes | custom selector for router state. With redux-immutable selectRouterState = state => state.get("router") 
 |savePreviousLocations |yes | if > 0 add the key "previousLocation" to state.router, with the last N locations. [{location,action}, ...]
+|batch |yes | a batch function for batching states updates with history updates. Prevent top-down updates on react : usage `import { unstable_batchedUpdates } from 'react-dom'; `  `batch = unstable_batchedUpdates`
+
 # Feedback
 
 Let me know what do you think! <br>

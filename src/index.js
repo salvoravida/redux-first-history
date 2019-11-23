@@ -66,9 +66,15 @@ export const createReduxHistoryContext = ({
   reduxTravelling = false,
   showHistoryAction = false,
   selectRouterState = null,
-  savePreviousLocations = 0
+  savePreviousLocations = 0,
+  batch = null
 }) => {
   /**********************************************  REDUX REDUCER ******************************************************/
+  if (typeof batch !== 'function') {
+    batch = fn => {
+      fn();
+    };
+  }
 
   if (typeof selectRouterState !== 'function') {
     selectRouterState = state => state[routerReducerKey];
@@ -158,9 +164,11 @@ export const createReduxHistoryContext = ({
         registeredCallback.forEach(c => c(routerState.location, routerState.action));
         return;
       }
-      store.dispatch(locationChangeAction(location, action));
-      const routerState = selectRouterState(store.getState());
-      registeredCallback.forEach(c => c(routerState.location, routerState.action));
+      batch(() => {
+        store.dispatch(locationChangeAction(location, action));
+        const routerState = selectRouterState(store.getState());
+        registeredCallback.forEach(c => c(routerState.location, routerState.action));
+      });
     });
 
     const reduxFirstHistory = {
