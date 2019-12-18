@@ -60,7 +60,7 @@ Demo : https://wy5qw1125l.codesandbox.io/ src: https://codesandbox.io/s/wy5qw112
 * support mix react-router, @reach-router & wouter in the same app!
 * fast migration from existing project, with same `LOCATION_CHANGE` and push actions (taken from RRR)
 * handle Redux Travelling from devTools (that's a non sense in production, but at the end of the day this decision it's up to you ...) 
-* custom opions and blazing fast  (ok, every lib should have these features, that's true :D)
+* custom options and blazing fast  (ok, every lib should have these features, that's true :D)
 
 Installation
 -----------
