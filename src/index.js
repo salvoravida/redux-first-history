@@ -17,9 +17,9 @@ export const reachify = reduxHistory => {
 
     navigate(to, { state, replace = false } = {}) {
       if (transitioning || replace) {
-        reduxHistory.replace({ pathname: to, state, key: `${Date.now()}` });
+        reduxHistory.replace(to, state);
       } else {
-        reduxHistory.push({ pathname: to, state, key: `${Date.now()}` });
+        reduxHistory.push(to, state);
       }
       transitioning = true;
       return new Promise(res => (resolveTransition = res));
