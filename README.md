@@ -162,6 +162,7 @@ export const createReduxHistoryContext = ({
 |selectRouterState |yes | custom selector for router state. With redux-immutable selectRouterState = state => state.get("router") 
 |savePreviousLocations |yes | if > 0 add the key "previousLocation" to state.router, with the last N locations. [{location,action}, ...]
 |batch |yes | a batch function for batching states updates with history updates. Prevent top-down updates on react : usage `import { unstable_batchedUpdates } from 'react-dom'; `  `batch = unstable_batchedUpdates`
+|reachGlobalHistory |yes | globalHistory object from  `@reach/router` - support imperatively `navigate` of @reach/router  - `import { navigate } from '@reach/router'`  : usage `import { globalHistory } from '@reach/router'; `  `reachGlobalHistory = globalHistory`
 
 # Feedback
 

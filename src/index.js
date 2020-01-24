@@ -67,7 +67,8 @@ export const createReduxHistoryContext = ({
   showHistoryAction = false,
   selectRouterState = null,
   savePreviousLocations = 0,
-  batch = null
+  batch = null,
+  reachGlobalHistory = null
 }) => {
   /** ********************************************  REDUX REDUCER ***************************************************** */
   if (typeof batch !== 'function') {
@@ -170,6 +171,26 @@ export const createReduxHistoryContext = ({
         registeredCallback.forEach(c => c(routerState.location, routerState.action));
       });
     });
+
+    // listen to reach globalHistory (support "navigate")
+    if (reachGlobalHistory) {
+      reachGlobalHistory.listen(({ location, action }) => {
+        if (action !== `POP`) {
+          const loc = {
+            pathname: location.pathname,
+            search: location.search,
+            hash: location.hash,
+            key: location.key,
+            state: location.state
+          };
+          batch(() => {
+            store.dispatch(locationChangeAction(loc, action));
+            const routerState = selectRouterState(store.getState());
+            registeredCallback.forEach(c => c(routerState.location, routerState.action));
+          });
+        }
+      });
+    }
 
     const reduxFirstHistory = {
       block: history.block,
