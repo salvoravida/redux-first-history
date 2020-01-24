@@ -149,7 +149,8 @@ export const createReduxHistoryContext = ({
   reduxTravelling = false, 
   selectRouterState = null,
   savePreviousLocations = 0,
-  batch = null
+  batch = null,
+  reachGlobalHistory = null
 })
 ```
 
