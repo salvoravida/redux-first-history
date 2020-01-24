@@ -1,4 +1,4 @@
-/*************************************************  reachify     ******************************************************/
+/** ***********************************************  reachify     ***************************************************** */
 
 export const reachify = reduxHistory => {
   let transitioning = false;
@@ -41,7 +41,7 @@ export const reachify = reduxHistory => {
   return rrHistory;
 };
 
-/*************************************************  REDUX ACTIONS *****************************************************/
+/** ***********************************************  REDUX ACTIONS **************************************************** */
 
 export const CALL_HISTORY_METHOD = '@@router/CALL_HISTORY_METHOD';
 export const LOCATION_CHANGE = '@@router/LOCATION_CHANGE';
@@ -57,7 +57,7 @@ export const go = updateLocation('go');
 export const goBack = updateLocation('goBack');
 export const goForward = updateLocation('goForward');
 
-/*************************************************  CONTEXT  **********************************************************/
+/** ***********************************************  CONTEXT  ********************************************************* */
 
 export const createReduxHistoryContext = ({
   history,
@@ -69,7 +69,7 @@ export const createReduxHistoryContext = ({
   savePreviousLocations = 0,
   batch = null
 }) => {
-  /**********************************************  REDUX REDUCER ******************************************************/
+  /** ********************************************  REDUX REDUCER ***************************************************** */
   if (typeof batch !== 'function') {
     batch = fn => {
       fn();
@@ -111,7 +111,7 @@ export const createReduxHistoryContext = ({
     return state;
   };
 
-  /***********************************************  REDUX MIDDLEWARE **************************************************/
+  /** *********************************************  REDUX MIDDLEWARE ************************************************* */
 
   // eslint-disable-next-line
   const routerMiddleware = () => next => action => {
@@ -125,7 +125,7 @@ export const createReduxHistoryContext = ({
     if (showHistoryAction) return next(action);
   };
 
-  /********************************************  REDUX TRAVELLING  ***************************************************/
+  /** ******************************************  REDUX TRAVELLING  ************************************************** */
 
   let isReduxTravelling = false;
 
@@ -143,7 +143,7 @@ export const createReduxHistoryContext = ({
     });
   };
 
-  /********************************************  REDUX FIRST HISTORY   ************************************************/
+  /** ******************************************  REDUX FIRST HISTORY   *********************************************** */
 
   const createReduxHistory = store => {
     if (reduxTravelling) {
@@ -152,14 +152,14 @@ export const createReduxHistoryContext = ({
 
     let registeredCallback = [];
 
-    //init location store
+    // init location store
     store.dispatch(locationChangeAction(history.location, history.action));
 
-    //listen to history API
+    // listen to history API
     history.listen((location, action) => {
       if (isReduxTravelling) {
         isReduxTravelling = false;
-        //notify registered callback travelling
+        // notify registered callback travelling
         const routerState = selectRouterState(store.getState());
         registeredCallback.forEach(c => c(routerState.location, routerState.action));
         return;
@@ -180,7 +180,7 @@ export const createReduxHistoryContext = ({
       goBack: (...args) => store.dispatch(goBack(...args)),
       goForward: (...args) => store.dispatch(goForward(...args)),
 
-      //listen tunnel
+      // listen tunnel
       listen: callback => {
         if (registeredCallback.indexOf(callback) < 0) {
           registeredCallback.push(callback);
@@ -191,21 +191,21 @@ export const createReduxHistoryContext = ({
       }
     };
 
-    //location tunnel
+    // location tunnel
     Object.defineProperty(reduxFirstHistory, 'location', {
       get() {
         return selectRouterState(store.getState()).location;
       }
     });
 
-    //action tunnel
+    // action tunnel
     Object.defineProperty(reduxFirstHistory, 'action', {
       get() {
         return selectRouterState(store.getState()).action;
       }
     });
 
-    //length tunnel
+    // length tunnel
     Object.defineProperty(reduxFirstHistory, 'length', {
       get() {
         return history.length;
