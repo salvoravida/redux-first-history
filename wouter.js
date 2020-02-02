@@ -6,7 +6,7 @@ export const createWouterHook = (history) => {
   return () => {
     const [path, update] = useState(history.location.pathname);
 
-    useEffect(() => history.listen((location) => update(location.pathname)), []);
+    useEffect(() => history.listen((l) => update(l.location? l.location.pathname: l.pathname)), []);
     return [path, navigate];
   };
 };
