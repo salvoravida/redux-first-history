@@ -4,17 +4,18 @@ export const reachify = reduxHistory => {
   let transitioning = false;
   let resolveTransition = () => {};
 
-  const rrHistory = {
+  return {
     // eslint-disable-next-line no-underscore-dangle
     _onTransitionComplete() {
       transitioning = false;
       resolveTransition();
     },
-
     listen(listener) {
+      if (reduxHistory.listenObject) {
+        return reduxHistory.listen(listener);
+      }
       return reduxHistory.listen((location, action) => listener({ location, action }));
     },
-
     navigate(to, { state, replace = false } = {}) {
       if (transitioning || replace) {
         reduxHistory.replace(to, state);
@@ -23,22 +24,14 @@ export const reachify = reduxHistory => {
       }
       transitioning = true;
       return new Promise(res => (resolveTransition = res));
-    }
-  };
-
-  Object.defineProperty(rrHistory, 'location', {
-    get() {
+    },
+    get location() {
       return reduxHistory.location;
-    }
-  });
-
-  Object.defineProperty(rrHistory, 'transitioning', {
-    get() {
+    },
+    get transitioning() {
       return transitioning;
     }
-  });
-
-  return rrHistory;
+  };
 };
 
 /** ***********************************************  REDUX ACTIONS **************************************************** */
@@ -68,14 +61,19 @@ export const createReduxHistoryContext = ({
   selectRouterState = null,
   savePreviousLocations = 0,
   batch = null,
-  reachGlobalHistory = null
+  reachGlobalHistory = null,
+  listenObject = false
 }) => {
-  /** ********************************************  REDUX REDUCER ***************************************************** */
+  const callListener = (listener, location, action) =>
+    listenObject ? listener({ location, action }) : listener(location, action);
+
   if (typeof batch !== 'function') {
     batch = fn => {
       fn();
     };
   }
+
+  /** ********************************************  REDUX REDUCER ***************************************************** */
 
   if (typeof selectRouterState !== 'function') {
     selectRouterState = state => state[routerReducerKey];
@@ -158,17 +156,23 @@ export const createReduxHistoryContext = ({
 
     // listen to history API
     history.listen((location, action) => {
+      // support history v5
+      if (location.location) {
+        action = location.action;
+        location = location.location;
+      }
+
       if (isReduxTravelling) {
         isReduxTravelling = false;
         // notify registered callback travelling
         const routerState = selectRouterState(store.getState());
-        registeredCallback.forEach(c => c(routerState.location, routerState.action));
+        registeredCallback.forEach(c => callListener(c, routerState.location, routerState.action));
         return;
       }
       batch(() => {
         store.dispatch(locationChangeAction(location, action));
         const routerState = selectRouterState(store.getState());
-        registeredCallback.forEach(c => c(routerState.location, routerState.action));
+        registeredCallback.forEach(c => callListener(c, routerState.location, routerState.action));
       });
     });
 
@@ -186,13 +190,16 @@ export const createReduxHistoryContext = ({
           batch(() => {
             store.dispatch(locationChangeAction(loc, action));
             const routerState = selectRouterState(store.getState());
-            registeredCallback.forEach(c => c(routerState.location, routerState.action));
+            registeredCallback.forEach(c =>
+              callListener(c, routerState.location, routerState.action)
+            );
           });
         }
       });
     }
 
-    const reduxFirstHistory = {
+    return {
+      listenObject,
       block: history.block,
       createHref: history.createHref,
       push: (...args) => store.dispatch(push(...args)),
@@ -200,8 +207,6 @@ export const createReduxHistoryContext = ({
       go: (...args) => store.dispatch(go(...args)),
       goBack: (...args) => store.dispatch(goBack(...args)),
       goForward: (...args) => store.dispatch(goForward(...args)),
-
-      // listen tunnel
       listen: callback => {
         if (registeredCallback.indexOf(callback) < 0) {
           registeredCallback.push(callback);
@@ -209,31 +214,17 @@ export const createReduxHistoryContext = ({
         return () => {
           registeredCallback = registeredCallback.filter(c => c !== callback);
         };
-      }
-    };
-
-    // location tunnel
-    Object.defineProperty(reduxFirstHistory, 'location', {
-      get() {
+      },
+      get location() {
         return selectRouterState(store.getState()).location;
-      }
-    });
-
-    // action tunnel
-    Object.defineProperty(reduxFirstHistory, 'action', {
-      get() {
+      },
+      get action() {
         return selectRouterState(store.getState()).action;
-      }
-    });
-
-    // length tunnel
-    Object.defineProperty(reduxFirstHistory, 'length', {
-      get() {
+      },
+      get length() {
         return history.length;
       }
-    });
-
-    return reduxFirstHistory;
+    };
   };
 
   return { routerReducer, routerMiddleware, createReduxHistory };
