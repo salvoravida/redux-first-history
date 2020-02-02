@@ -1,6 +1,6 @@
 {
   "name": "redux-first-history",
-  "version": "4.5.0",
+  "version": "4.6.0-beta.1",
   "description": "Redux First History - Redux history binding support react-router - @reach/router - wouter",
   "main": "lib/index.js",
   "module": "lib/index.esm.js",
@@ -37,20 +37,18 @@
   "homepage": "https://github.com/salvoravida/redux-first-history#readme",
   "dependencies": {},
   "peerDependencies": {
-    "history": "^4.7.2",
+    "history": "^4.7.2 || ^5.0",
     "redux": "^3.6.0 || ^4.0.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.7.0",
-    "@babel/core": "^7.7.2",
-    "@babel/preset-env": "^7.7.1",
+    "@babel/cli": "7.8.4",
+    "@babel/core": "7.8.4",
+    "@babel/preset-env": "7.8.4",
     "@salvoravida/eslint-config": "0.0.1",
     "@types/reach__router": "1.2.6",
-    "cross-env": "6.0.3",
     "history": "4.10.1",
-    "react": "16.10.2",
     "redux": "4.0.4",
-    "rollup": "1.27.0",
+    "rollup": "1.31.0",
     "rollup-plugin-babel": "4.3.3"
   }
 }
