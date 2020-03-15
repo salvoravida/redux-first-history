@@ -44,7 +44,7 @@
     "@babel/cli": "7.8.4",
     "@babel/core": "7.8.7",
     "@babel/preset-env": "7.8.7",
-    "@salvoravida/eslint-config": "0.0.2",
+    "@salvoravida/eslint-config": "0.0.3",
     "@types/reach__router": "1.3.0",
     "history": "4.10.1",
     "redux": "4.0.5",
