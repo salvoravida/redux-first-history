@@ -30,7 +30,7 @@ export const reachify = reduxHistory => {
     },
     get transitioning() {
       return transitioning;
-    }
+    },
   };
 };
 
@@ -41,7 +41,7 @@ export const LOCATION_CHANGE = '@@router/LOCATION_CHANGE';
 
 const updateLocation = method => (...args) => ({
   type: CALL_HISTORY_METHOD,
-  payload: { method, args }
+  payload: { method, args },
 });
 
 export const push = updateLocation('push');
@@ -62,7 +62,7 @@ export const createReduxHistoryContext = ({
   savePreviousLocations = 0,
   batch = null,
   reachGlobalHistory = null,
-  listenObject = false
+  listenObject = false,
 }) => {
   const callListener = (listener, location, action) =>
     listenObject ? listener({ location, action }) : listener(location, action);
@@ -81,12 +81,12 @@ export const createReduxHistoryContext = ({
 
   const locationChangeAction = (location, action) => ({
     type: LOCATION_CHANGE,
-    payload: oldLocationChangePayload ? { ...location, action } : { location, action }
+    payload: oldLocationChangePayload ? { ...location, action } : { location, action },
   });
 
   const initialState = {
     location: null,
-    action: null
+    action: null,
   };
 
   const numLocationToTrack = isNaN(savePreviousLocations) ? 0 : savePreviousLocations;
@@ -118,7 +118,7 @@ export const createReduxHistoryContext = ({
       return next(action);
     }
     const {
-      payload: { method, args }
+      payload: { method, args },
     } = action;
     history[method](...args);
     if (showHistoryAction) return next(action);
@@ -185,14 +185,12 @@ export const createReduxHistoryContext = ({
             search: location.search,
             hash: location.hash,
             key: location.key,
-            state: location.state
+            state: location.state,
           };
           batch(() => {
             store.dispatch(locationChangeAction(loc, action));
             const routerState = selectRouterState(store.getState());
-            registeredCallback.forEach(c =>
-              callListener(c, routerState.location, routerState.action)
-            );
+            registeredCallback.forEach(c => callListener(c, routerState.location, routerState.action));
           });
         }
       });
@@ -223,7 +221,7 @@ export const createReduxHistoryContext = ({
       },
       get length() {
         return history.length;
-      }
+      },
     };
   };
 
