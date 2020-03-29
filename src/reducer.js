@@ -1,6 +1,6 @@
 import { LOCATION_CHANGE } from './actions';
 
-export const createRouterReducer = ({ oldLocationChangePayload = false, savePreviousLocations = 0 }) => {
+export const createRouterReducer = ({ savePreviousLocations = 0 }) => {
   const initialState = {
     location: null,
     action: null,
@@ -12,13 +12,7 @@ export const createRouterReducer = ({ oldLocationChangePayload = false, savePrev
 
   return (state = initialState, { type, payload } = {}) => {
     if (type === LOCATION_CHANGE) {
-      if (oldLocationChangePayload) {
-        const { action, ...location } = payload || {};
-        const previousLocations = numLocationToTrack
-          ? [{ location, action }, ...state.previousLocations.slice(0, numLocationToTrack)]
-          : undefined;
-        return { ...state, location, action, previousLocations };
-      }
+
       const { location, action } = payload || {};
       const previousLocations = numLocationToTrack
         ? [{ location, action }, ...state.previousLocations.slice(0, numLocationToTrack)]

@@ -5,7 +5,6 @@ import { createRouterReducer } from './reducer';
 export const createReduxHistoryContext = ({
   history,
   routerReducerKey = 'router',
-  oldLocationChangePayload = false,
   reduxTravelling = false,
   showHistoryAction = false,
   selectRouterState = null,
@@ -31,10 +30,10 @@ export const createReduxHistoryContext = ({
 
   const locationChangeAction = (location, action) => ({
     type: LOCATION_CHANGE,
-    payload: oldLocationChangePayload ? { ...location, action } : { location, action },
+    payload: { location, action },
   });
 
-  const routerReducer = createRouterReducer({ oldLocationChangePayload, savePreviousLocations });
+  const routerReducer = createRouterReducer({ savePreviousLocations });
   const routerMiddleware = createRouterMiddleware({ history, showHistoryAction });
 
   /** ******************************************  REDUX TRAVELLING  ************************************************** */
