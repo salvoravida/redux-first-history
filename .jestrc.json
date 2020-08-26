@@ -1,0 +1,15 @@
+{
+  "testRegex": "(/src/.*\\.test.js)$",
+  "verbose": true,
+  "transform": {
+    "^.+\\.js$": "babel-jest"
+  },
+  "moduleFileExtensions": [
+    "js",
+    "jsx"
+  ],
+  "moduleDirectories": [
+    "node_modules",
+    "src/"
+  ]
+}

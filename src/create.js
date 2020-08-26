@@ -1,4 +1,4 @@
-import { LOCATION_CHANGE, go, goBack, goForward, push, replace } from './actions';
+import { go, goBack, goForward, push, replace, locationChangeAction } from './actions';
 import { createRouterMiddleware } from './middleware';
 import { createRouterReducer } from './reducer';
 
@@ -27,11 +27,6 @@ export const createReduxHistoryContext = ({
   if (typeof selectRouterState !== 'function') {
     selectRouterState = state => state[routerReducerKey];
   }
-
-  const locationChangeAction = (location, action) => ({
-    type: LOCATION_CHANGE,
-    payload: { location, action },
-  });
 
   const routerReducer = createRouterReducer({ savePreviousLocations });
   const routerMiddleware = createRouterMiddleware({ history, showHistoryAction });

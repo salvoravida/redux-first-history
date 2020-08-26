@@ -21,6 +21,7 @@ export const reachify = reduxHistory => {
         reduxHistory.push(to, state);
       }
       transitioning = true;
+      // eslint-disable-next-line no-return-assign
       return new Promise(res => (resolveTransition = res));
     },
     get location() {

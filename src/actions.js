@@ -1,6 +1,11 @@
 export const CALL_HISTORY_METHOD = '@@router/CALL_HISTORY_METHOD';
 export const LOCATION_CHANGE = '@@router/LOCATION_CHANGE';
 
+export const locationChangeAction = (location, action) => ({
+  type: LOCATION_CHANGE,
+  payload: { location, action },
+});
+
 const updateLocation = method => (...args) => ({
   type: CALL_HISTORY_METHOD,
   payload: { method, args },
