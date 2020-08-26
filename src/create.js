@@ -11,8 +11,9 @@ export const createReduxHistoryContext = ({
   savePreviousLocations = 0,
   batch = null,
   reachGlobalHistory = null,
-  listenObject = false,
 }) => {
+  let listenObject = false;
+
   const callListener = (listener, location, action) =>
     listenObject ? listener({ location, action }) : listener(location, action);
 
@@ -67,6 +68,7 @@ export const createReduxHistoryContext = ({
       if (location.location) {
         action = location.action;
         location = location.location;
+        listenObject = true;
       }
 
       if (isReduxTravelling) {
