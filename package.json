@@ -5,7 +5,6 @@
   "main": "lib/index.js",
   "module": "lib/index.esm.js",
   "types": "types/index.d.ts",
-  "typings": "",
   "scripts": {
     "build": "rollup -c",
     "start": "rollup -c -w",
