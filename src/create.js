@@ -106,7 +106,6 @@ export const createReduxHistoryContext = ({
     }
 
     return {
-      listenObject,
       block: history.block,
       createHref: history.createHref,
       push: (...args) => store.dispatch(push(...args)),
@@ -130,6 +129,9 @@ export const createReduxHistoryContext = ({
       },
       get length() {
         return history.length;
+      },
+      get listenObject() {
+        return listenObject;
       },
     };
   };
