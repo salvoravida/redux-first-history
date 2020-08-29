@@ -54,13 +54,12 @@ Demo : https://wy5qw1125l.codesandbox.io/ src: https://codesandbox.io/s/wy5qw112
 * No React dependency (we want history to be always in store!)
 * 100% one-way data flow (only dispatch actions!)
 * improve React shallowCompare as there is only one "location"
-* support react-router v4 and v5
-* support @reach/router 1.2.1
+* support react-router v4 / v5 / v6
+* support @reach/router 1.x
 * support @wouter 2.x
 * support mix react-router, @reach-router & wouter in the same app!
 * fast migration from existing project, with same `LOCATION_CHANGE` and push actions (taken from RRR)
 * handle Redux Travelling from devTools (that's a non sense in production, but at the end of the day this decision it's up to you ...) 
-* custom options and blazing fast  (ok, every lib should have these features, that's true :D)
 
 Installation
 -----------
@@ -85,7 +84,7 @@ import { createBrowserHistory } from 'history';
 
 const { createReduxHistory, routerMiddleware, routerReducer } = createReduxHistoryContext({ 
   history: createBrowserHistory(),
-  //others options if needed 
+  //other options if needed 
 });
 
 export const store = createStore(
@@ -131,7 +130,7 @@ export default App;
 
 While working with *relatively large* projects, it's quite common to use both `redux` and `react-router`.
 
-So you may have components that take location from store, others that take location from router context, and others from withRouter HOC. If you are on a big crazy already-messed-up project, you could see also connect(withRouter) or withRouter(connect) ....
+So you may have components that take location from store, others that take location from router context, and others from withRouter HOC.
 
 This sometimes could generate sync issue, due to the fact that many components are updated at different time.
 In addition, React shallowCompare rendering optimization will not work as it should.
@@ -156,28 +155,46 @@ export const createReduxHistoryContext = ({
 
 |key	| optional |description   	| 
 |---	|---|---	|
-|history	| no| The `history/createBrowserHistory` object - currently tested only with version 4.7.2 - 4.10.1  	| 
+|history	| no| The `createBrowserHistory` object - currently tested only with version 4.7.2 - 4.10.1  	| 
 |routerReducerKey | yes | if you don't like `router` name for reducer.
-|oldLocationChangePayload | yes | if you use the old`LOCATION_CHANGE`payload`{ ...location }`instead of the new`{ location }`, setting this flag will make you able to not change your app at all!
+|oldLocationChangePayload | yes | if you use the old`LOCATION_CHANGE`payload`{ ...location }`instead of the new`{ location }`, setting this flag will make you able to not change your app at all! (removed in v5)
 |reduxTravelling | yes | if you want to play with redux-dev-tools :D.
 |selectRouterState |yes | custom selector for router state. With redux-immutable selectRouterState = state => state.get("router") 
 |savePreviousLocations |yes | if > 0 add the key "previousLocation" to state.router, with the last N locations. [{location,action}, ...]
 |batch |yes | a batch function for batching states updates with history updates. Prevent top-down updates on react : usage `import { unstable_batchedUpdates } from 'react-dom'; `  `batch = unstable_batchedUpdates`
 |reachGlobalHistory |yes | globalHistory object from  `@reach/router` - support imperatively `navigate` of @reach/router  - `import { navigate } from '@reach/router'`  : usage `import { globalHistory } from '@reach/router'; `  `reachGlobalHistory = globalHistory`
 
+# Advanced config
+
+* support "navigate" from @reach/router
+```javascript
+import { createReduxHistoryContext, reachify } from "redux-first-history";
+import { createBrowserHistory } from 'history';
+import { globalHistory } from '@reach/router';
+
+const { createReduxHistory, routerMiddleware, routerReducer } = createReduxHistoryContext({ 
+  history: createBrowserHistory(),
+  reachGlobalHistory: globalHistory,
+  //other options if needed 
+});
+```
+
+* React batch updates: top-down batch updates for maximum performance. Fix also some update edge cases.
+```javascript
+import { createReduxHistoryContext, reachify } from "redux-first-history";
+import { createBrowserHistory } from 'history';
+import { unstable_batchedUpdates } from 'react-dom';
+
+const { createReduxHistory, routerMiddleware, routerReducer } = createReduxHistoryContext({ 
+  history: createBrowserHistory(),
+  batch: unstable_batchedUpdates,
+  //other options if needed 
+});
+```
 # Feedback
 
 Let me know what do you think! <br>
 *Enjoy it? Star this project!* :D
-
-# Todo
-* test, test and test!
-* code clean and split
-* warning for uncorrect usage
-* try to use it with non-react-like other framework!
-* redux-first-app POC
-
-any idea? let me know and contribute!
 
 # credits & inspiration
  - redux-first-routing
