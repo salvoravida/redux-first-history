@@ -1,6 +1,6 @@
 {
   "name": "redux-first-history",
-  "version": "4.6.0-beta.2",
+  "version": "5.0.0-beta.1",
   "description": "Redux First History - Redux history binding support react-router - @reach/router - wouter",
   "main": "lib/index.js",
   "module": "lib/index.esm.js",

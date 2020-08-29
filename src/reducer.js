@@ -12,7 +12,6 @@ export const createRouterReducer = ({ savePreviousLocations = 0 }) => {
 
   return (state = initialState, { type, payload } = {}) => {
     if (type === LOCATION_CHANGE) {
-
       const { location, action } = payload || {};
       const previousLocations = numLocationToTrack
         ? [{ location, action }, ...state.previousLocations.slice(0, numLocationToTrack)]
