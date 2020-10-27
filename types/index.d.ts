@@ -29,8 +29,8 @@ export function reachify(reduxHistory: History<any>): ReachHistory;
 export const push: (to: any) => ReduxAction;
 export const replace: (to: any) => ReduxAction;
 export const go: (to: any) => ReduxAction;
-export const goBack: (to: any) => ReduxAction;
-export const goForward: (to: any) => ReduxAction;
+export const goBack: () => ReduxAction;
+export const goForward: () => ReduxAction;
 
 export interface RouterState {
   location: Location;
