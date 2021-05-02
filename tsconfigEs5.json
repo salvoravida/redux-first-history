@@ -1,0 +1,28 @@
+{
+   "compilerOptions": {
+      "target": "es5",
+      "allowJs": true,
+      "skipLibCheck": true,
+      "esModuleInterop": true,
+      "allowSyntheticDefaultImports": true,
+      "strict": true,
+      "forceConsistentCasingInFileNames": true,
+      "noFallthroughCasesInSwitch": true,
+      "module": "commonjs",
+      "moduleResolution": "node",
+      "resolveJsonModule": true,
+      "isolatedModules": true,
+      "jsx": "react",
+      "noImplicitAny": false,
+      "declaration": true,
+      "outDir": "./build/es5",
+      "allowUnusedLabels": false,
+      "diagnostics": false,
+      "sourceMap": true,
+      "strictNullChecks": true,
+      "traceResolution": false,
+      "watch": false
+   },
+   "include": ["./src"],
+   "exclude": ["node_modules"]
+}
