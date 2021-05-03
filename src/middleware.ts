@@ -1,7 +1,7 @@
 /* eslint-disable consistent-return */
 import { History } from 'history';
 import { AnyAction as ReduxAction, Dispatch, Middleware } from 'redux';
-import { CALL_HISTORY_METHOD, HistoryMethods } from './actions';
+import { CALL_HISTORY_METHOD, HistoryMethods, updateLocation } from './actions';
 
 type CreateRouterMiddlewareArgs = {
    history: History;
@@ -16,7 +16,9 @@ export const createRouterMiddleware = ({
       return next(action);
    }
    const method = action.payload.method as HistoryMethods;
-   // @ts-ignore
-   history[method](...action.payload.args);
+   const args = action.payload.args as Parameters<ReturnType<typeof updateLocation>>;
+   const historyMethod = history[method];
+
+   historyMethod(...args);
    if (showHistoryAction) return next(action);
 };

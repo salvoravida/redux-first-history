@@ -1,4 +1,4 @@
-import { Location, Action } from 'history';
+import { Location, Action, History } from 'history';
 import { AnyAction as ReduxAction } from 'redux';
 
 export const CALL_HISTORY_METHOD = '@@router/CALL_HISTORY_METHOD';
@@ -11,7 +11,9 @@ export const locationChangeAction = <T>(location: Location<T>, action: Action) =
    payload: { location, action },
 });
 
-const updateLocation = (method: HistoryMethods) => (...args: unknown[]): ReduxAction => ({
+export const updateLocation = <T extends HistoryMethods>(method: T) => (
+   ...args: Parameters<History[T]>
+): ReduxAction => ({
    type: CALL_HISTORY_METHOD,
    payload: { method, args },
 });
