@@ -1,37 +1,56 @@
-import { combineReducers, createStore } from 'redux';
-import { LOCATION_CHANGE, CALL_HISTORY_METHOD, push, replace, go, goBack, goForward } from '../src';
 import { createRouterReducer } from '../src/reducer';
+import { locationChangeAction } from '../src/actions';
 
 describe('RouterReducer', () => {
    it('create route reducer without previousLocations', () => {
       const routerReducer = createRouterReducer({});
-      let routerState = routerReducer(undefined, { type: 'tst' });
-
+      const routerState = routerReducer(undefined, { type: 'init' });
       expect(routerState).toEqual({ location: null, action: null });
-      routerState = routerReducer(routerState, push('/path'));
-      expect(routerState).toEqual({
-         location: { pathname: '/path' },
+      const newLocation = {
+         pathname: '/path',
+         search: '',
+         hash: '',
+         state: undefined,
+         key: '0h2353',
+      };
+      const nextRouterState = routerReducer(undefined, locationChangeAction(newLocation, 'PUSH'));
+      expect(nextRouterState).toEqual({
+         location: newLocation,
          action: 'PUSH',
-         previousLocations: [],
       });
    });
-
    it('create route reducer with previousLocations', () => {
-   /*   const store = createStore(
-         combineReducers({ router: createRouterReducer({ savePreviousLocations: 2 }) }),
+      const routerReducer = createRouterReducer({ savePreviousLocations: 1 });
+      const routerState = routerReducer(undefined, { type: 'init' });
+      expect(routerState).toEqual({ location: null, action: null, previousLocations: [] });
+      const newLocation = (index: number) => ({
+         pathname: `/path${index}`,
+         search: '',
+         hash: '',
+         state: undefined,
+         key: '0h2353',
+      });
+      let nextRouterState = routerReducer(
+         routerState,
+         locationChangeAction(newLocation(1), 'PUSH'),
+      );
+      nextRouterState = routerReducer(
+         nextRouterState,
+         locationChangeAction(newLocation(2), 'PUSH'),
+      );
+      nextRouterState = routerReducer(
+         nextRouterState,
+         locationChangeAction(newLocation(3), 'PUSH'),
       );
 
-      expect(store.getState().router).toEqual({
-         location: null,
-         action: null,
-         previousLocations: [],
-      });
-      store.dispatch(push('/path'));
-      console.log(store.getState().router);
-      expect(store.getState().router).toEqual({
-         location: { pathname: '/path' },
+      const expectedState = {
+         location: newLocation(3),
          action: 'PUSH',
-         previousLocations: [],
-      });*/
+         previousLocations: [
+            locationChangeAction(newLocation(3), 'PUSH').payload,
+            locationChangeAction(newLocation(2), 'PUSH').payload,
+         ],
+      };
+      expect(nextRouterState).toEqual(expectedState);
    });
 });

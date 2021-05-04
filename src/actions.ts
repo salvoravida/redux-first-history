@@ -11,8 +11,8 @@ export const locationChangeAction = <T>(location: Location<T>, action: Action) =
    payload: { location, action },
 });
 
-export const updateLocation = <T extends HistoryMethods>(method: T) => (
-   ...args: Parameters<History[T]>
+const updateLocation = (method: HistoryMethods) => (
+   ...args: Parameters<History[HistoryMethods]>
 ): ReduxAction => ({
    type: CALL_HISTORY_METHOD,
    payload: { method, args },

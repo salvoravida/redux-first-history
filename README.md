@@ -1,7 +1,8 @@
 # redux-first-history
 <p align="center">
   <a href="https://www.npmjs.com/package/redux-first-history"><img src="https://img.shields.io/npm/v/redux-first-history.svg?style=flat-square"></a>
-  <a href="https://www.npmjs.com/package/redux-first-history"><img src="https://img.shields.io/npm/dt/redux-first-history.svg?style=flat-square"></a><br/>
+  <a href="https://www.npmjs.com/package/redux-first-history"><img src="https://img.shields.io/npm/dt/redux-first-history.svg?style=flat-square"></a>
+  <img src="./cov-badge.svg"></a><br/>
   Redux First History - Make Redux 100% SINGLE-AND-ONLY source of truth!
 </p>
 

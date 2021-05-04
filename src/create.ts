@@ -4,7 +4,7 @@ import { History as ReachHistory } from '@reach/router';
 import { Middleware, Reducer, Store } from 'redux';
 import { go, goBack, goForward, push, replace, locationChangeAction } from './actions';
 import { createRouterMiddleware } from './middleware';
-import { createRouterReducer } from './reducer';
+import { createRouterReducer, RouterState } from './reducer';
 
 export interface IHistoryContextOptions {
    history: History;
@@ -12,14 +12,14 @@ export interface IHistoryContextOptions {
    oldLocationChangePayload?: boolean;
    reduxTravelling?: boolean;
    showHistoryAction?: boolean;
-   selectRouterState?: (state: any) => any;
+   selectRouterState?: <S>(state: S) => RouterState;
    savePreviousLocations?: number;
-   batch?: (callback: () => any) => void;
+   batch?: (callback: () => void) => void;
    reachGlobalHistory?: ReachHistory;
 }
 
 export interface IHistoryContext {
-   createReduxHistory: (store: Store) => History;
+   createReduxHistory: (store: Store) => History & { listenObject: boolean };
    routerMiddleware: Middleware;
    routerReducer: Reducer;
 }
@@ -76,16 +76,17 @@ export const createReduxHistoryContext = ({
 
    /** ******************************************  REDUX FIRST HISTORY   *********************************************** */
 
-   const createReduxHistory = (store: Store): History => {
-      if (reduxTravelling) {
-         handleReduxTravelling(store);
-      }
+   const createReduxHistory = (store: Store): History & { listenObject: boolean } => {
+
 
       let registeredCallback: any[] = [];
 
       // init location store
       store.dispatch(locationChangeAction(history.location, history.action));
 
+      if (reduxTravelling) {
+         handleReduxTravelling(store);
+      }
       // listen to history API
       history.listen((location, action) => {
          // support history v5
@@ -147,11 +148,12 @@ export const createReduxHistoryContext = ({
       return {
          block: history.block,
          createHref: history.createHref,
-         push: (...args: any) => store.dispatch(push(...args)),
-         replace: (...args: any) => store.dispatch(replace(...args)),
-         go: (...args) => store.dispatch(go(...args)),
-         goBack: (...args) => store.dispatch(goBack(...args)),
-         goForward: (...args) => store.dispatch(goForward(...args)),
+         push: (...args: Parameters<History['push']>) => store.dispatch(push(...args)),
+         replace: (...args: Parameters<History['replace']>) => store.dispatch(replace(...args)),
+         go: (...args: Parameters<History['go']>) => store.dispatch(go(...args)),
+         goBack: (...args: Parameters<History['goBack']>) => store.dispatch(goBack(...args)),
+         goForward: (...args: Parameters<History['goForward']>) =>
+            store.dispatch(goForward(...args)),
          listen: callback => {
             if (registeredCallback.indexOf(callback) < 0) {
                registeredCallback.push(callback);
@@ -160,10 +162,12 @@ export const createReduxHistoryContext = ({
                registeredCallback = registeredCallback.filter(c => c !== callback);
             };
          },
+         // @ts-ignore
          get location() {
             // @ts-ignore
             return selectRouterState(store.getState()).location;
          },
+         // @ts-ignore
          get action() {
             // @ts-ignore
             return selectRouterState(store.getState()).action;
