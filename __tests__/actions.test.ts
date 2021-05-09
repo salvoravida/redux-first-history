@@ -2,7 +2,7 @@ import { LOCATION_CHANGE, CALL_HISTORY_METHOD, push, replace, go, goBack, goForw
 import { locationChangeAction } from '../src/actions';
 
 describe('Actions', () => {
-   it('returns correct action when calling locationChangeAction()', () => {
+   it('should create correct action when calling locationChangeAction()', () => {
       const actualAction = locationChangeAction<undefined>(
          { pathname: '/', search: '', hash: '', state: undefined },
          'POP',
@@ -21,7 +21,7 @@ describe('Actions', () => {
       expect(actualAction).toEqual(expectedAction);
    });
 
-   it('returns correct action when calling push()', () => {
+   it('should create correct action when calling push()', () => {
       const actualAction = push('/path/to/somewhere');
       const expectedAction = {
          type: CALL_HISTORY_METHOD,
@@ -33,7 +33,7 @@ describe('Actions', () => {
       expect(actualAction).toEqual(expectedAction);
    });
 
-   it('returns correct action when calling replace()', () => {
+   it('should create correct action when calling replace()', () => {
       const actualAction = replace('/path/to/somewhere');
       const expectedAction = {
          type: CALL_HISTORY_METHOD,
@@ -45,7 +45,7 @@ describe('Actions', () => {
       expect(actualAction).toEqual(expectedAction);
    });
 
-   it('returns correct action when calling go()', () => {
+   it('should create correct action when calling go()', () => {
       const actualAction = go(2);
       const expectedAction = {
          type: CALL_HISTORY_METHOD,
@@ -57,7 +57,7 @@ describe('Actions', () => {
       expect(actualAction).toEqual(expectedAction);
    });
 
-   it('returns correct action when calling goBack()', () => {
+   it('should create correct action when calling goBack()', () => {
       const actualAction = goBack();
       const expectedAction = {
          type: CALL_HISTORY_METHOD,
@@ -69,7 +69,7 @@ describe('Actions', () => {
       expect(actualAction).toEqual(expectedAction);
    });
 
-   it('returns correct action when calling goForward()', () => {
+   it('should create correct action when calling goForward()', () => {
       const actualAction = goForward();
       const expectedAction = {
          type: CALL_HISTORY_METHOD,

@@ -13,6 +13,7 @@ const config: Config.InitialOptions = {
    coverageReporters: ['json-summary', 'text'],
    moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx'],
    moduleDirectories: ['node_modules', 'src/'],
+   verbose: true,
 };
 
 export default config;

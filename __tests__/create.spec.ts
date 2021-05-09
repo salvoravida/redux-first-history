@@ -11,6 +11,9 @@ describe('Context', () => {
       });
       const fakeHistory = ({
          ...history,
+         goBack: jest.fn(history.goBack),
+         go: jest.fn(history.go),
+         goForward: jest.fn(history.goForward),
          push: jest.fn(history.push),
          replace: jest.fn(history.replace),
       } as unknown) as History;
@@ -31,18 +34,31 @@ describe('Context', () => {
       expect(store.dispatch).toHaveBeenCalledTimes(2);
       expect(batch).toHaveBeenCalledTimes(1);
       expect(fakeHistory.push).toHaveBeenCalledTimes(1);
+      expect(fakeHistory.replace).toHaveBeenCalledTimes(0);
       expect(store.getState().router.location).toBe(reduxHistory.location);
       expect(store.getState().router.action).toBe(reduxHistory.action);
+      expect(store.getState().router.location.pathname).toBe('/push');
 
       reduxHistory.replace('/replace');
       expect(store.dispatch).toHaveBeenCalledTimes(4);
       expect(batch).toHaveBeenCalledTimes(2);
-      expect(fakeHistory.push).toHaveBeenCalledTimes(1);
       expect(fakeHistory.replace).toHaveBeenCalledTimes(1);
       expect(store.getState().router.location).toBe(reduxHistory.location);
       expect(store.getState().router.action).toBe(reduxHistory.action);
       expect(fakeHistory.length).toBe(reduxHistory.length);
+      expect(store.getState().router.location.pathname).toBe('/replace');
+
+      reduxHistory.goBack();
+      expect(store.dispatch).toHaveBeenCalledTimes(5);
+      expect(fakeHistory.goBack).toHaveBeenCalledTimes(1);
+      reduxHistory.goForward();
+      expect(store.dispatch).toHaveBeenCalledTimes(6);
+      expect(fakeHistory.goForward).toHaveBeenCalledTimes(1);
+      reduxHistory.go(-1);
+      expect(store.dispatch).toHaveBeenCalledTimes(7);
+      expect(fakeHistory.go).toHaveBeenCalledTimes(1);
    });
+
    it('create ReduxFirstHistory context - middleware - router - listenObject', () => {
       const history = createBrowserHistory();
       const batch = jest.fn(callback => {
@@ -129,12 +145,20 @@ describe('Context', () => {
       expect(spyListen.action).toEqual('PUSH');
 
       reachHistory.navigate('/navigate');
-
       expect(store.dispatch).toHaveBeenCalledTimes(3);
       expect(fakeHistory.push).toHaveBeenCalledTimes(1);
       expect(store.getState().router.location).toBe(reduxHistory.location);
       expect(store.getState().router.action).toBe(reduxHistory.action);
       expect(reduxHistory.listenObject).toBe(true);
+
+      reachHistory.navigate('/navigate2', { replace: true });
+      expect(store.dispatch).toHaveBeenCalledTimes(5);
+      expect(fakeHistory.replace).toHaveBeenCalledTimes(1);
+      expect(store.getState().router.location).toBe(reduxHistory.location);
+      expect(store.getState().router.location).toBe(reachHistory.location);
+      expect(store.getState().router.action).toBe(reduxHistory.action);
+      expect(reduxHistory.listenObject).toBe(true);
+      expect(reachHistory.transitioning).toBe(true);
    });
 
    it('reduxFirstHistory listen test', () => {
