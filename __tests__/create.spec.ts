@@ -246,4 +246,6 @@ describe('Context', () => {
       expect(spyListen.location.pathname).toEqual('/replace');
       expect(spyListen.action).toEqual('REPLACE');
    });
+
+
 });

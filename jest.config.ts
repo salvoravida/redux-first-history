@@ -14,6 +14,7 @@ const config: Config.InitialOptions = {
    moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx'],
    moduleDirectories: ['node_modules', 'src/'],
    verbose: true,
+   testPathIgnorePatterns: ['store.ts'],
 };
 
 export default config;
