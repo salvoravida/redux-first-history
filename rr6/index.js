@@ -1,3 +1,4 @@
+/* eslint-disable prefer-object-spread, import/no-unresolved*/
 import React from 'react';
 import { Router } from 'react-router';
 

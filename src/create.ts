@@ -77,8 +77,6 @@ export const createReduxHistoryContext = ({
    /** ******************************************  REDUX FIRST HISTORY   *********************************************** */
 
    const createReduxHistory = (store: Store): History & { listenObject: boolean } => {
-
-
       let registeredCallback: any[] = [];
 
       // init location store
@@ -144,6 +142,9 @@ export const createReduxHistoryContext = ({
          });
       }
 
+      const back = (...args: Parameters<History['goBack']>) => store.dispatch(goBack(...args));
+      const forward = (...args: Parameters<History['goForward']>) =>
+         store.dispatch(goForward(...args));
       // @ts-ignore
       return {
          block: history.block,
@@ -151,9 +152,10 @@ export const createReduxHistoryContext = ({
          push: (...args: Parameters<History['push']>) => store.dispatch(push(...args)),
          replace: (...args: Parameters<History['replace']>) => store.dispatch(replace(...args)),
          go: (...args: Parameters<History['go']>) => store.dispatch(go(...args)),
-         goBack: (...args: Parameters<History['goBack']>) => store.dispatch(goBack(...args)),
-         goForward: (...args: Parameters<History['goForward']>) =>
-            store.dispatch(goForward(...args)),
+         goBack: back,
+         goForward: forward,
+         back,
+         forward,
          listen: callback => {
             if (registeredCallback.indexOf(callback) < 0) {
                registeredCallback.push(callback);
