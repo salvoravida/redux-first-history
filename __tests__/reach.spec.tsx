@@ -35,7 +35,7 @@ describe('Reach Router', () => {
       });
       const { container } = render(<App />);
 
-      expect(container.querySelector('p')?.innerHTML).toEqual('Home');
+      expect(container.querySelector('p')?.innerHTML).toEqual('Home /');
       act(() => {
          fakeHistory.push('/dashboard');
       });
@@ -73,7 +73,7 @@ describe('Reach Router', () => {
       });
       const { container } = render(<App />);
 
-      expect(container.querySelector('p')?.innerHTML).toEqual('Home');
+      expect(container.querySelector('p')?.innerHTML).toEqual('Home /');
       act(() => {
          fakeHistory.push('/dashboard');
       });
