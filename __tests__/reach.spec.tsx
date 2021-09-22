@@ -17,8 +17,8 @@ describe('Reach Router', () => {
       store.dispatch = jest.fn(store.dispatch);
       expect(store.dispatch).toHaveBeenCalledTimes(0);
 
-      const Home = ({ path }: { path?: string }) => <p>Home</p>;
-      const Dashboard = ({ path }: { path?: string }) => <p>Dashboard</p>;
+      const Home = ({ path }: { path?: string }) => <p>Home {path}</p>;
+      const Dashboard = ({ path }: { path?: string }) => <p>Dashboard {path}</p>;
 
       const App = () => (
          <Reach.LocationProvider history={reachHistory}>
@@ -55,8 +55,8 @@ describe('Reach Router', () => {
       store.dispatch = jest.fn(store.dispatch);
       expect(store.dispatch).toHaveBeenCalledTimes(0);
 
-      const Home = ({ path }: { path?: string }) => <p>Home</p>;
-      const Dashboard = ({ path }: { path?: string }) => <p>Dashboard</p>;
+      const Home = ({ path }: { path?: string }) => <p>Home {path}</p>;
+      const Dashboard = ({ path }: { path?: string }) => <p>Dashboard {path}</p>;
 
       const App = () => (
          <Reach.LocationProvider history={reachHistory}>

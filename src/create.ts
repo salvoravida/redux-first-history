@@ -1,7 +1,6 @@
-import { History, Location } from 'history';
-// eslint-disable-next-line import/no-unresolved
-import { History as ReachHistory } from '@reach/router';
-import { Middleware, Reducer, Store } from 'redux';
+import type { History, Location } from 'history';
+import type { History as ReachHistory } from '@reach/router';
+import type { Middleware, Reducer, Store } from 'redux';
 import { go, goBack, goForward, push, replace, locationChangeAction } from './actions';
 import { createRouterMiddleware } from './middleware';
 import { createRouterReducer, RouterState } from './reducer';
@@ -77,7 +76,7 @@ export const createReduxHistoryContext = ({
    /** ******************************************  REDUX FIRST HISTORY   *********************************************** */
 
    const createReduxHistory = (store: Store): History & { listenObject: boolean } => {
-      let registeredCallback: any[] = [];
+      let registeredCallback: unknown[] = [];
 
       // init location store
       store.dispatch(locationChangeAction(history.location, history.action));

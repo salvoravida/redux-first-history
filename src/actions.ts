@@ -11,12 +11,12 @@ export const locationChangeAction = <T>(location: Location<T>, action: Action) =
    payload: { location, action },
 });
 
-const updateLocation =
-   (method: HistoryMethods) =>
-      (...args: Parameters<History[HistoryMethods]>): ReduxAction => ({
-         type: CALL_HISTORY_METHOD,
-         payload: { method, args },
-      });
+function updateLocation(method: HistoryMethods) {
+   return (...args: Parameters<History[HistoryMethods]>): ReduxAction => ({
+      type: CALL_HISTORY_METHOD,
+      payload: { method, args },
+   });
+}
 
 export const push = updateLocation('push');
 export const replace = updateLocation('replace');
