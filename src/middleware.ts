@@ -8,37 +8,38 @@ type CreateRouterMiddlewareArgs = {
    showHistoryAction: boolean;
 };
 
-export const createRouterMiddleware = ({
-   history,
-   showHistoryAction,
-}: CreateRouterMiddlewareArgs): Middleware => () => (next: Dispatch) => (action: ReduxAction) => {
-   if (action.type !== CALL_HISTORY_METHOD) {
-      return next(action);
-   }
-   const method = action.payload.method as HistoryMethods;
-   const args = action.payload.args as Parameters<History[HistoryMethods]>;
+export const createRouterMiddleware =
+   ({ history, showHistoryAction }: CreateRouterMiddlewareArgs): Middleware =>
+   () =>
+   (next: Dispatch) =>
+   (action: ReduxAction) => {
+      if (action.type !== CALL_HISTORY_METHOD) {
+         return next(action);
+      }
+      const method = action.payload.method as HistoryMethods;
+      const args = action.payload.args as Parameters<History[HistoryMethods]>;
 
-   // eslint-disable-next-line default-case
-   switch (method) {
-      case 'push':
-         history.push(...(args as Parameters<History['push']>));
-         break;
-      case 'replace':
-         history.replace(...(args as Parameters<History['replace']>));
-         break;
-      case 'go':
-         history.go(...(args as Parameters<History['go']>));
-         break;
-      case 'goBack':
-         history.goBack && history.goBack(...(args as Parameters<History['goBack']>));
-         //@ts-ignore //support history 5.x
-         history.back && history.back(...(args as Parameters<History['goBack']>));
-         break;
-      case 'goForward':
-         history.goForward && history.goForward(...(args as Parameters<History['goForward']>));
-         //@ts-ignore //support history 5.x
-         history.forward && history.forward(...(args as Parameters<History['goForward']>));
-         break;
-   }
-   if (showHistoryAction) return next(action);
-};
+      // eslint-disable-next-line default-case
+      switch (method) {
+         case 'push':
+            history.push(...(args as Parameters<History['push']>));
+            break;
+         case 'replace':
+            history.replace(...(args as Parameters<History['replace']>));
+            break;
+         case 'go':
+            history.go(...(args as Parameters<History['go']>));
+            break;
+         case 'goBack':
+            history.goBack && history.goBack(...(args as Parameters<History['goBack']>));
+            //@ts-ignore //support history 5.x
+            history.back && history.back(...(args as Parameters<History['goBack']>));
+            break;
+         case 'goForward':
+            history.goForward && history.goForward(...(args as Parameters<History['goForward']>));
+            //@ts-ignore //support history 5.x
+            history.forward && history.forward(...(args as Parameters<History['goForward']>));
+            break;
+      }
+      if (showHistoryAction) return next(action);
+   };

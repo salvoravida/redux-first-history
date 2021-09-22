@@ -10,13 +10,13 @@ describe('RouterMiddleware history v4', () => {
       let fakeHistory;
 
       beforeEach(() => {
-         fakeHistory = ({
+         fakeHistory = {
             push: jest.fn(() => {}),
             replace: jest.fn(() => {}),
             go: jest.fn(() => {}),
             goBack: jest.fn(() => {}),
             goForward: jest.fn(() => {}),
-         } as unknown) as History;
+         } as unknown as History;
          routerMiddleware = createRouterMiddleware({
             history: fakeHistory,
             showHistoryAction: false,
@@ -71,13 +71,13 @@ describe('RouterMiddleware history v4', () => {
       let fakeHistory;
 
       beforeEach(() => {
-         fakeHistory = ({
+         fakeHistory = {
             push: jest.fn(() => {}),
             replace: jest.fn(() => {}),
             go: jest.fn(() => {}),
             goBack: jest.fn(() => {}),
             goForward: jest.fn(() => {}),
-         } as unknown) as History;
+         } as unknown as History;
          routerMiddleware = createRouterMiddleware({
             history: fakeHistory,
             showHistoryAction: true,
@@ -134,13 +134,13 @@ describe('RouterMiddleware history v5', () => {
       let fakeHistory;
 
       beforeEach(() => {
-         fakeHistory = ({
+         fakeHistory = {
             push: jest.fn(() => {}),
             replace: jest.fn(() => {}),
             go: jest.fn(() => {}),
             back: jest.fn(() => {}),
             forward: jest.fn(() => {}),
-         } as unknown) as History;
+         } as unknown as History;
          routerMiddleware = createRouterMiddleware({
             history: fakeHistory,
             showHistoryAction: false,
@@ -195,13 +195,13 @@ describe('RouterMiddleware history v5', () => {
       let fakeHistory;
 
       beforeEach(() => {
-         fakeHistory = ({
+         fakeHistory = {
             push: jest.fn(() => {}),
             replace: jest.fn(() => {}),
             go: jest.fn(() => {}),
             back: jest.fn(() => {}),
             forward: jest.fn(() => {}),
-         } as unknown) as History;
+         } as unknown as History;
          routerMiddleware = createRouterMiddleware({
             history: fakeHistory,
             showHistoryAction: true,
