@@ -161,7 +161,7 @@ export const createReduxHistoryContext = ({
 
 |key	| optional |description   	| 
 |---	|---|---	|
-|history	| no| The `createBrowserHistory` object - currently tested only with version 4.7.2 - 4.10.1  	| 
+|history	| no| The `createBrowserHistory` object - v4.x/v5.x  	| 
 |routerReducerKey | yes | if you don't like `router` name for reducer.
 |oldLocationChangePayload | yes | if you use the old`LOCATION_CHANGE`payload`{ ...location }`instead of the new`{ location }`, setting this flag will make you able to not change your app at all! (removed in v5)
 |reduxTravelling | yes | if you want to play with redux-dev-tools :D.
