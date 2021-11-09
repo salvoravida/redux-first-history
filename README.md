@@ -21,6 +21,9 @@ Compatible with `immer` - `redux-immer` - `redux-immutable`.
 *Use whatever you like. History will just work as it should.*
 
 ```javascript
+//react-router v6
+useLocation() === state.router.location
+
 //react-router v4 - v5
 this.context.router.history.location === state.router.location
 this.context.route.location === state.router.location
@@ -47,6 +50,8 @@ Why? Because there is no synchronization at all! There is only one history: redu
 </p>
 
 Demo : https://wy5qw1125l.codesandbox.io/ src: https://codesandbox.io/s/wy5qw1125l
+
+Demo v6 : https://codesandbox.io/s/redux-first-history-demo-rr6-uccuw
 
 # Main features
  
