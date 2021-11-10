@@ -7,10 +7,10 @@
 </p>
 
 Redux history binding for
-* [`react-router`](https://github.com/ReactTraining/react-router)
+* [`react-router`](https://github.com/remix-run/react-router)
 * [`@reach/router`](https://github.com/reach/router)
 * [`wouter`](https://github.com/molefrog/wouter)
-* mix `react-router` - `@reach-router` - `wouter` in the same app!! Demo : https://wy5qw1125l.codesandbox.io/.
+* mix `react-router` - `@reach/router` - `wouter` in the same app!! Demo : https://wy5qw1125l.codesandbox.io/.
 
 Compatible with `immer` - `redux-immer` - `redux-immutable`.
 
@@ -21,15 +21,17 @@ Compatible with `immer` - `redux-immer` - `redux-immutable`.
 *Use whatever you like. History will just work as it should.*
 
 ```javascript
-//react-router v6
+//react-router v5 - v6
 useLocation() === state.router.location
 
-//react-router v4 - v5
-this.context.router.history.location === state.router.location
-this.context.route.location === state.router.location
+//react-router v5
 this.props.history.location === state.router.location
 this.props.location === state.router.location
 withRouter.props.location === state.router.location
+
+//react-router v4
+this.context.router.history.location === state.router.location
+this.context.route.location === state.router.location
 
 //@reach/router
 this.props.location === state.router.location
@@ -63,7 +65,7 @@ Demo v6 : https://codesandbox.io/s/redux-first-history-demo-rr6-uccuw
 * support react-router v4 / v5 / v6
 * support @reach/router 1.x
 * support @wouter 2.x
-* support mix react-router, @reach-router & wouter in the same app!
+* support mix react-router, @reach/router & wouter in the same app!
 * fast migration from existing project, with same `LOCATION_CHANGE` and push actions (taken from RRR)
 * handle Redux Travelling from devTools (that's a non sense in production, but at the end of the day this decision it's up to you ...) 
 
@@ -150,7 +152,6 @@ they will always be tunneled to *state.router.location* !
 export const createReduxHistoryContext = ({
   history, 
   routerReducerKey = 'router', 
-  oldLocationChangePayload = false, 
   reduxTravelling = false, 
   selectRouterState = null,
   savePreviousLocations = 0,
@@ -163,7 +164,6 @@ export const createReduxHistoryContext = ({
 |---	|---|---	|
 |history	| no| The `createBrowserHistory` object - v4.x/v5.x  	| 
 |routerReducerKey | yes | if you don't like `router` name for reducer.
-|oldLocationChangePayload | yes | if you use the old`LOCATION_CHANGE`payload`{ ...location }`instead of the new`{ location }`, setting this flag will make you able to not change your app at all! (removed in v5)
 |reduxTravelling | yes | if you want to play with redux-dev-tools :D.
 |selectRouterState |yes | custom selector for router state. With redux-immutable selectRouterState = state => state.get("router") 
 |savePreviousLocations |yes | if > 0 add the key "previousLocation" to state.router, with the last N locations. [{location,action}, ...]
