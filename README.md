@@ -64,7 +64,7 @@ Demo v6 : https://codesandbox.io/s/redux-first-history-demo-rr6-uccuw
 * improve React shallowCompare as there is only one "location"
 * support react-router v4 / v5 / v6
 * support @reach/router 1.x
-* support @wouter 2.x
+* support wouter 2.x
 * support mix react-router, @reach/router & wouter in the same app!
 * fast migration from existing project, with same `LOCATION_CHANGE` and push actions (taken from RRR)
 * handle Redux Travelling from devTools (that's a non sense in production, but at the end of the day this decision it's up to you ...) 
@@ -110,6 +110,29 @@ export const history = createReduxHistory(store);
 export const reachHistory = reachify(history);
 //if you use wouter
 export const wouterUseLocation = createWouterHook(history);
+```
+
+store.js (with @reduxjs/toolkit)
+```javascript
+import { combineReducers } from "redux";
+import { configureStore } from "@reduxjs/toolkit";
+import { createReduxHistoryContext, reachify } from "redux-first-history";
+import { createBrowserHistory } from "history";
+
+const {
+  createReduxHistory,
+  routerMiddleware,
+  routerReducer
+} = createReduxHistoryContext({ history: createBrowserHistory() });
+
+export const store = configureStore({
+  reducer: combineReducers({
+    router: routerReducer
+  }),
+  middleware: [routerMiddleware]
+});
+
+export const history = createReduxHistory(store);
 ```
 
 app.js 
