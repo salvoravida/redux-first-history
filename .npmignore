@@ -2,6 +2,5 @@ __tests__/*
 coverage/*
 node_modules/*
 .idea/*
-src/
 .eslintignore
 .eslintrc.json
