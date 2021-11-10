@@ -139,7 +139,6 @@ app.js
 ```javascript
 import React, { Component } from "react";
 import { Provider, connect } from "react-redux";
-import { push } from "redux-first-history";
 import { Router } from "react-router-dom";
 import { store, history } from "./store";
 
@@ -153,6 +152,25 @@ const App = () => (
 
 export default App;
 ```
+
+app.js (react-router v6)
+```javascript
+import React, { Component } from "react";
+import { Provider, connect } from "react-redux";
+import { HistoryRouter as Router } from "redux-first-history/rr6";
+import { store, history } from "./store";
+
+const App = () => (
+      <Provider store={store}>
+        <Router history={history}>
+        //.....
+        </Router>
+      </Provider>
+    );
+
+export default App;
+```
+
 * just simple Router with no more ConnectedRouter!
 * use `push` action creator from `redux-first-history` if you need to dispatch location from `saga` or connected components.
 * Probably, you already did it with `react-router-redux` or `connected-react-router` (in this case you have only to replace the import!) 
