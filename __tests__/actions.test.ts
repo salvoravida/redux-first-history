@@ -3,7 +3,7 @@ import { locationChangeAction } from '../src/actions';
 
 describe('Actions', () => {
    it('should create correct action when calling locationChangeAction()', () => {
-      const actualAction = locationChangeAction<undefined>(
+      const actualAction = locationChangeAction(
          { pathname: '/', search: '', hash: '', state: undefined },
          'POP',
       );

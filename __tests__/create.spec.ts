@@ -9,8 +9,13 @@ describe('Context', () => {
       const batch = jest.fn(callback => {
          callback();
       });
+
       const fakeHistory = {
          ...history,
+         // @ts-ignore
+         back: jest.fn(history.back),
+         // @ts-ignore
+         forward: jest.fn(history.forward),
          goBack: jest.fn(history.goBack),
          go: jest.fn(history.go),
          goForward: jest.fn(history.goForward),
@@ -57,6 +62,17 @@ describe('Context', () => {
       reduxHistory.go(-1);
       expect(store.dispatch).toHaveBeenCalledTimes(7);
       expect(fakeHistory.go).toHaveBeenCalledTimes(1);
+
+      //@ts-ignore
+      reduxHistory.back();
+      expect(store.dispatch).toHaveBeenCalledTimes(8);
+      //@ts-ignore
+      expect(fakeHistory.back).toHaveBeenCalledTimes(2);
+      //@ts-ignore
+      reduxHistory.forward();
+      expect(store.dispatch).toHaveBeenCalledTimes(9);
+      //@ts-ignore
+      expect(fakeHistory.forward).toHaveBeenCalledTimes(2);
    });
 
    it('create ReduxFirstHistory context - middleware - router (with advanced options)', () => {

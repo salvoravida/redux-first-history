@@ -17,6 +17,7 @@ export const createRouterMiddleware =
          return next(action);
       }
       const method = action.payload.method as HistoryMethods;
+      // @ts-ignore
       const args = action.payload.args as Parameters<History[HistoryMethods]>;
 
       // eslint-disable-next-line default-case
@@ -30,12 +31,16 @@ export const createRouterMiddleware =
          case 'go':
             history.go(...(args as Parameters<History['go']>));
             break;
+         case 'back':
          case 'goBack':
+            // @ts-ignore
             history.goBack && history.goBack(...(args as Parameters<History['goBack']>));
             //@ts-ignore //support history 5.x
             history.back && history.back(...(args as Parameters<History['goBack']>));
             break;
+         case 'forward':
          case 'goForward':
+            // @ts-ignore
             history.goForward && history.goForward(...(args as Parameters<History['goForward']>));
             //@ts-ignore //support history 5.x
             history.forward && history.forward(...(args as Parameters<History['goForward']>));

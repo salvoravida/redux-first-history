@@ -1,7 +1,16 @@
 import type { History, Location } from 'history';
 import type { History as ReachHistory } from '@reach/router';
 import type { Middleware, Reducer, Store } from 'redux';
-import { go, goBack, goForward, push, replace, locationChangeAction } from './actions';
+import {
+   go,
+   goBack,
+   goForward,
+   back,
+   forward,
+   push,
+   replace,
+   locationChangeAction,
+} from './actions';
 import { createRouterMiddleware } from './middleware';
 import { createRouterReducer, RouterState } from './reducer';
 
@@ -85,6 +94,7 @@ export const createReduxHistoryContext = ({
          handleReduxTravelling(store);
       }
       // listen to history API
+      // @ts-ignore
       history.listen((location, action) => {
          // support history v5
          // @ts-ignore
@@ -130,6 +140,7 @@ export const createReduxHistoryContext = ({
                };
                // @ts-ignore
                batch(() => {
+                  // @ts-ignore
                   store.dispatch(locationChangeAction(loc, action));
                   // @ts-ignore
                   const routerState = selectRouterState(store.getState());
@@ -141,9 +152,6 @@ export const createReduxHistoryContext = ({
          });
       }
 
-      const back = (...args: Parameters<History['goBack']>) => store.dispatch(goBack(...args));
-      const forward = (...args: Parameters<History['goForward']>) =>
-         store.dispatch(goForward(...args));
       // @ts-ignore
       return {
          block: history.block,
@@ -151,10 +159,15 @@ export const createReduxHistoryContext = ({
          push: (...args: Parameters<History['push']>) => store.dispatch(push(...args)),
          replace: (...args: Parameters<History['replace']>) => store.dispatch(replace(...args)),
          go: (...args: Parameters<History['go']>) => store.dispatch(go(...args)),
-         goBack: back,
-         goForward: forward,
-         back,
-         forward,
+         // @ts-ignore
+         goBack: (...args: Parameters<History['goBack']>) => store.dispatch(goBack(...args)),
+         // @ts-ignore
+         goForward: (...args: Parameters<History['goForward']>) =>
+            store.dispatch(goForward(...args)),
+         // @ts-ignore
+         back: (...args: Parameters<History['back']>) => store.dispatch(back(...args)),
+         // @ts-ignore
+         forward: (...args: Parameters<History['forward']>) => store.dispatch(forward(...args)),
          listen: callback => {
             if (registeredCallback.indexOf(callback) < 0) {
                registeredCallback.push(callback);
@@ -174,6 +187,7 @@ export const createReduxHistoryContext = ({
             return selectRouterState(store.getState()).action;
          },
          get length() {
+            // @ts-ignore
             return history.length;
          },
          // @ts-ignore

@@ -4,14 +4,23 @@ import { AnyAction as ReduxAction } from 'redux';
 export const CALL_HISTORY_METHOD = '@@router/CALL_HISTORY_METHOD';
 export const LOCATION_CHANGE = '@@router/LOCATION_CHANGE';
 
-export type HistoryMethods = 'push' | 'replace' | 'go' | 'goBack' | 'goForward';
+//support history v4/ v5
+export type HistoryMethods =
+   | 'push'
+   | 'replace'
+   | 'go'
+   | 'goBack'
+   | 'goForward'
+   | 'back'
+   | 'forward';
 
-export const locationChangeAction = <T>(location: Location<T>, action: Action) => ({
+export const locationChangeAction = (location: Location, action: Action) => ({
    type: LOCATION_CHANGE,
    payload: { location, action },
 });
 
 function updateLocation(method: HistoryMethods) {
+   // @ts-ignore
    return (...args: Parameters<History[HistoryMethods]>): ReduxAction => ({
       type: CALL_HISTORY_METHOD,
       payload: { method, args },
@@ -23,3 +32,5 @@ export const replace = updateLocation('replace');
 export const go = updateLocation('go');
 export const goBack = updateLocation('goBack');
 export const goForward = updateLocation('goForward');
+export const back = updateLocation('back');
+export const forward = updateLocation('forward');
