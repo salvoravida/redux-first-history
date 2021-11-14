@@ -10,7 +10,7 @@ Redux history binding for
 * [`react-router`](https://github.com/remix-run/react-router)
 * [`@reach/router`](https://github.com/reach/router)
 * [`wouter`](https://github.com/molefrog/wouter)
-* mix `react-router` - `@reach/router` - `wouter` in the same app!! Demo : https://wy5qw1125l.codesandbox.io/.
+* mix `react-router` - `@reach/router` - `wouter` in the same app!! Demo : https://wy5qw1125l.codesandbox.io/ (react-router v5) https://uccuw.csb.app/ (react-router v6)
 
 Compatible with `immer` - `redux-immer` - `redux-immutable`.
 
@@ -51,9 +51,9 @@ Why? Because there is no synchronization at all! There is only one history: redu
 <img alt="Edit Redux-First Router Demo" src="https://i.postimg.cc/HnxxYzmz/Untitled_Diagram.png">
 </p>
 
-Demo : https://wy5qw1125l.codesandbox.io/ src: https://codesandbox.io/s/wy5qw1125l
+Demo (react-router v5) : https://wy5qw1125l.codesandbox.io/ src: https://codesandbox.io/s/wy5qw1125l
 
-Demo v6 : https://codesandbox.io/s/redux-first-history-demo-rr6-uccuw
+Demo (react-router v6) : https://uccuw.csb.app/ src: https://codesandbox.io/s/redux-first-history-demo-rr6-uccuw
 
 # Main features
  
