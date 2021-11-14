@@ -8,7 +8,7 @@ export type RouterState = {
    previousLocations?: { location?: Location | null; action?: Action | null }[];
 };
 
-export const createRouterReducer = ({ savePreviousLocations = 0 }): Reducer => {
+export const createRouterReducer = ({ savePreviousLocations = 0 }): Reducer<RouterState> => {
    const initialState: RouterState = {
       location: null,
       action: null,

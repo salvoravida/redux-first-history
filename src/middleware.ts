@@ -36,14 +36,14 @@ export const createRouterMiddleware =
             // @ts-ignore
             history.goBack && history.goBack(...(args as Parameters<History['goBack']>));
             //@ts-ignore //support history 5.x
-            history.back && history.back(...(args as Parameters<History['goBack']>));
+            history.back && history.back(...(args as Parameters<History['back']>));
             break;
          case 'forward':
          case 'goForward':
             // @ts-ignore
             history.goForward && history.goForward(...(args as Parameters<History['goForward']>));
             //@ts-ignore //support history 5.x
-            history.forward && history.forward(...(args as Parameters<History['goForward']>));
+            history.forward && history.forward(...(args as Parameters<History['forward']>));
             break;
       }
       if (showHistoryAction) return next(action);

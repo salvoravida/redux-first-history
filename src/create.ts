@@ -29,7 +29,7 @@ export interface IHistoryContextOptions {
 export interface IHistoryContext {
    createReduxHistory: (store: Store) => History & { listenObject: boolean };
    routerMiddleware: Middleware;
-   routerReducer: Reducer;
+   routerReducer: Reducer<RouterState>;
 }
 
 export const createReduxHistoryContext = ({

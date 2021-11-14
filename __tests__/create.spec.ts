@@ -42,7 +42,7 @@ describe('Context', () => {
       expect(fakeHistory.replace).toHaveBeenCalledTimes(0);
       expect(store.getState().router.location).toBe(reduxHistory.location);
       expect(store.getState().router.action).toBe(reduxHistory.action);
-      expect(store.getState().router.location.pathname).toBe('/push');
+      expect(store.getState().router.location?.pathname).toBe('/push');
 
       reduxHistory.replace('/replace');
       expect(store.dispatch).toHaveBeenCalledTimes(4);
@@ -51,7 +51,7 @@ describe('Context', () => {
       expect(store.getState().router.location).toBe(reduxHistory.location);
       expect(store.getState().router.action).toBe(reduxHistory.action);
       expect(fakeHistory.length).toBe(reduxHistory.length);
-      expect(store.getState().router.location.pathname).toBe('/replace');
+      expect(store.getState().router.location?.pathname).toBe('/replace');
 
       reduxHistory.goBack();
       expect(store.dispatch).toHaveBeenCalledTimes(5);
@@ -112,7 +112,7 @@ describe('Context', () => {
       expect(fakeHistory.replace).toHaveBeenCalledTimes(0);
       expect(store.getState().myRouter.location).toBe(reduxHistory.location);
       expect(store.getState().myRouter.action).toBe(reduxHistory.action);
-      expect(store.getState().myRouter.location.pathname).toBe('/push');
+      expect(store.getState().myRouter.location?.pathname).toBe('/push');
 
       reduxHistory.replace('/replace');
       expect(store.dispatch).toHaveBeenCalledTimes(4);
@@ -121,7 +121,7 @@ describe('Context', () => {
       expect(store.getState().myRouter.location).toBe(reduxHistory.location);
       expect(store.getState().myRouter.action).toBe(reduxHistory.action);
       expect(fakeHistory.length).toBe(reduxHistory.length);
-      expect(store.getState().myRouter.location.pathname).toBe('/replace');
+      expect(store.getState().myRouter.location?.pathname).toBe('/replace');
 
       reduxHistory.goBack();
       expect(store.dispatch).toHaveBeenCalledTimes(5);
