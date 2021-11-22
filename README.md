@@ -21,6 +21,7 @@ Compatible with `immer` - `redux-immer` - `redux-immutable`.
 ## Table of Contents
 
 - [Main Goal](#main-goal)
+  - [Demo](#demo)
 - [Main Features](#main-features)
 - [Installation](#installation)
 - [Usage](#usage)
