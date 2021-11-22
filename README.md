@@ -67,9 +67,13 @@ Why? Because there is no synchronization at all! There is only one history: redu
 <img alt="Edit Redux-First Router Demo" src="https://i.postimg.cc/HnxxYzmz/Untitled_Diagram.png">
 </p>
 
-Demo (react-router v5) : https://wy5qw1125l.codesandbox.io/ src: https://codesandbox.io/s/wy5qw1125l
+## Demo
 
-Demo (react-router v6) : https://uccuw.csb.app/ src: https://codesandbox.io/s/redux-first-history-demo-rr6-uccuw
+- react-router v5: https://wy5qw1125l.codesandbox.io/ 
+  - Source: https://codesandbox.io/s/wy5qw1125l
+
+- react-router v6: https://uccuw.csb.app/
+  - Source: https://codesandbox.io/s/redux-first-history-demo-rr6-uccuw
 
 # Main Features
  
