@@ -10,7 +10,8 @@ Redux history binding for
 * [`react-router`](https://github.com/remix-run/react-router)
 * [`@reach/router`](https://github.com/reach/router)
 * [`wouter`](https://github.com/molefrog/wouter)
-* mix `react-router` - `@reach/router` - `wouter` in the same app!! Demo : https://wy5qw1125l.codesandbox.io/ (react-router v5) https://uccuw.csb.app/ (react-router v6)
+* mix `react-router` - `@reach/router` - `wouter` in the same app!! 
+  * (Demo : https://wy5qw1125l.codesandbox.io/ (react-router v5) https://uccuw.csb.app/ (react-router v6)
 
 Compatible with `immer` - `redux-immer` - `redux-immutable`.
 
