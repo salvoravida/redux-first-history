@@ -17,8 +17,19 @@ Compatible with `immer` - `redux-immer` - `redux-immutable`.
 :tada: A smaller, faster, optionated, issue-free alternative to 
 [`connected-react-router`](https://github.com/supasate/connected-react-router/issues)
 
-# Table of Contents
+## Table of Contents
 
+- [Main Goal](#main-goal)
+- [Main Features](#main-features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Abstract](#abstract)
+- [Options](#options)
+- [Advanced Config](#advanced-config)
+- [Feedback](#feedback)
+- [Credits & Inspiration](#credits--inspiration)
+- [Contributors](#contributors)
+- [License](#license)
 
 
 ## Main Goal
@@ -59,7 +70,7 @@ Demo (react-router v5) : https://wy5qw1125l.codesandbox.io/ src: https://codesan
 
 Demo (react-router v6) : https://uccuw.csb.app/ src: https://codesandbox.io/s/redux-first-history-demo-rr6-uccuw
 
-# Main features
+# Main Features
  
 * 100% one source of truth (store)
 * No synchronization depending on rendering lifecycle (ConnectedRouter)
@@ -157,7 +168,7 @@ const App = () => (
 
 export default App;
 
-//...Can be used via history.push() etc.
+//...History can now be used via other components using history.push() etc.
 ```
 
 app.js (react-router v6)
@@ -177,7 +188,7 @@ const App = () => (
 
 export default App;
 
-//...Can be used via navigate()
+//...History can now be used via other components using navigate()
 ```
 
 
@@ -244,7 +255,7 @@ export const createReduxHistoryContext = ({
 |batch |yes | a batch function for batching states updates with history updates. Prevent top-down updates on react : usage `import { unstable_batchedUpdates } from 'react-dom'; `  `batch = unstable_batchedUpdates`
 |reachGlobalHistory |yes | globalHistory object from  `@reach/router` - support imperatively `navigate` of @reach/router  - `import { navigate } from '@reach/router'`  : usage `import { globalHistory } from '@reach/router'; `  `reachGlobalHistory = globalHistory`
 
-# Advanced config
+# Advanced Config
 
 * support "navigate" from @reach/router
 ```javascript
@@ -276,15 +287,15 @@ const { createReduxHistory, routerMiddleware, routerReducer } = createReduxHisto
 Let me know what do you think! <br>
 *Enjoy it? Star this project!* :D
 
-# credits & inspiration
+# Credits & Inspiration
  - redux-first-routing
  - react-router-redux
  - connected-react-router
 
-Contributors
+# Contributors
 ------------
 See [Contributors](https://github.com/salvoravida/redux-first-history/graphs/contributors).
 
-License
+# License
 -------
 [MIT License](https://github.com/salvoravida/redux-first-history/blob/master/LICENSE.md).
