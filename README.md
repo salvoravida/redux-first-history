@@ -17,6 +17,10 @@ Compatible with `immer` - `redux-immer` - `redux-immutable`.
 :tada: A smaller, faster, optionated, issue-free alternative to 
 [`connected-react-router`](https://github.com/supasate/connected-react-router/issues)
 
+# Table of Contents
+
+
+
 ## Main Goal
 *Use whatever you like. History will just work as it should.*
 
@@ -43,9 +47,9 @@ useLocation()[0] === state.router.location.pathname
 You can mix redux, redux-saga, react-router, @reach/router & wouter
 without any synchronization issue! <br>
 Why? Because there is no synchronization at all! There is only one history: reduxHistory!
-* one way data-flow
-* one unique source of truth
-* no more location issue!
+* One way data-flow
+* One unique source of truth
+* No more location issues!
 
 <p align="center">
 <img alt="Edit Redux-First Router Demo" src="https://i.postimg.cc/HnxxYzmz/Untitled_Diagram.png">
@@ -58,16 +62,17 @@ Demo (react-router v6) : https://uccuw.csb.app/ src: https://codesandbox.io/s/re
 # Main features
  
 * 100% one source of truth (store)
-* No syncronization depending on rendering lifecicle (ConnectedRouter)
+* No synchronization depending on rendering lifecycle (ConnectedRouter)
 * No React dependency (we want history to be always in store!)
 * 100% one-way data flow (only dispatch actions!)
-* improve React shallowCompare as there is only one "location"
-* support react-router v4 / v5 / v6
-* support @reach/router 1.x
-* support wouter 2.x
-* support mix react-router, @reach/router & wouter in the same app!
-* fast migration from existing project, with same `LOCATION_CHANGE` and push actions (taken from RRR)
-* handle Redux Travelling from devTools (that's a non sense in production, but at the end of the day this decision it's up to you ...) 
+* Improve React shallowCompare as there is only one "location"
+* Support react-router v4 / v5 / v6
+* Support @reach/router 1.x
+* Support wouter 2.x
+* Support mix react-router, @reach/router & wouter in the same app!
+* Fast migration from an existing project, with the same `LOCATION_CHANGE` and push actions (taken from RRR)
+* Handle Redux Travelling from dev tools (that's nonsense in production, but at the end of the day this decision it's up to you ...)
+
 
 Installation
 -----------
@@ -200,16 +205,16 @@ export const RandomThunk = (dispatch) => {
 ```
 
 
-* just simple Router with no more ConnectedRouter!
-* Probably, you already did connect the Redux store with `react-router-redux` or `connected-react-router` (in this case you have only to replace the import!) 
+* Just a simple Router with no more ConnectedRouter!
+* Probably, you already did connect the Redux store with `react-router-redux` or `connected-react-router` (in this case you have only to replace the import!)
 
 # Abstract
 
 While working with *relatively large* projects, it's quite common to use both `redux` and `react-router`.
 
-So you may have components that take location from store, others that take location from router context, and others from withRouter HOC.
+So you may have components that take location from the store, others that take location from router context, and others from withRouter HOC.
 
-This sometimes could generate sync issue, due to the fact that many components are updated at different time.
+This sometimes could generate sync issues, due to the fact that many components are updated at different times.
 In addition, React shallowCompare rendering optimization will not work as it should.
 
 With `redux-first-history`, you can mix components that get history from wherever, 
