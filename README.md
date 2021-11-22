@@ -10,7 +10,7 @@ Redux history binding for
 * [`react-router`](https://github.com/remix-run/react-router)
 * [`@reach/router`](https://github.com/reach/router)
 * [`wouter`](https://github.com/molefrog/wouter)
-* mix `react-router` - `@reach/router` - `wouter` in the same app!! 
+* Mix `react-router` - `@reach/router` - `wouter` in the same app!
   * (Demo : https://wy5qw1125l.codesandbox.io/ (react-router v5) https://uccuw.csb.app/ (react-router v6)
 
 Compatible with `immer` - `redux-immer` - `redux-immutable`.
@@ -258,7 +258,7 @@ export const createReduxHistoryContext = ({
 
 # Advanced Config
 
-* support "navigate" from @reach/router
+* Support "navigate" from @reach/router
 ```javascript
 import { createReduxHistoryContext, reachify } from "redux-first-history";
 import { createBrowserHistory } from 'history';
@@ -271,7 +271,7 @@ const { createReduxHistory, routerMiddleware, routerReducer } = createReduxHisto
 });
 ```
 
-* React batch updates: top-down batch updates for maximum performance. Fix also some update edge cases.
+* React batch updates: top-down batch updates for maximum performance. Fix also some updated edge cases.
 ```javascript
 import { createReduxHistoryContext, reachify } from "redux-first-history";
 import { createBrowserHistory } from 'history';
@@ -294,9 +294,7 @@ Let me know what do you think! <br>
  - connected-react-router
 
 # Contributors
-------------
 See [Contributors](https://github.com/salvoravida/redux-first-history/graphs/contributors).
 
 # License
--------
 [MIT License](https://github.com/salvoravida/redux-first-history/blob/master/LICENSE.md).
