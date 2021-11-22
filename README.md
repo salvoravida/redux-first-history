@@ -35,9 +35,9 @@ Compatible with `immer` - `redux-immer` - `redux-immutable`.
 ## Main Goal
 While working with *relatively large* projects, it's quite common to use both `redux` and `react-router`.
 
-So you may have components that take location from the store, others that take location from router context, and others from withRouter HOC.
+So you may have components that take location from the redux store, others that take location from router context, and others from withRouter HOC.
 
-This sometimes could generate sync issues, due to the fact that many components are updated at different times.
+This can generate sync issues, due to the fact that many components are updated at different times.
 In addition, React shallowCompare rendering optimization will not work as it should.
 
 With `redux-first-history`, you can mix components that get history from wherever, 
@@ -65,7 +65,7 @@ this.props.location === state.router.location
 useLocation()[0] === state.router.location.pathname
 ```
 
-You can mix redux, redux-saga, react-router, @reach/router & wouter
+Mix redux, redux-saga, react-router, @reach/router & wouter
 without any synchronization issue! <br>
 Why? Because there is no synchronization at all! There is only one history: reduxHistory!
 * One way data-flow
