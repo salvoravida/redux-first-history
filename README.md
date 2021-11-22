@@ -24,7 +24,6 @@ Compatible with `immer` - `redux-immer` - `redux-immutable`.
 - [Main Features](#main-features)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Abstract](#abstract)
 - [Options](#options)
 - [Advanced Config](#advanced-config)
 - [Feedback](#feedback)
@@ -34,6 +33,16 @@ Compatible with `immer` - `redux-immer` - `redux-immutable`.
 
 
 ## Main Goal
+While working with *relatively large* projects, it's quite common to use both `redux` and `react-router`.
+
+So you may have components that take location from the store, others that take location from router context, and others from withRouter HOC.
+
+This sometimes could generate sync issues, due to the fact that many components are updated at different times.
+In addition, React shallowCompare rendering optimization will not work as it should.
+
+With `redux-first-history`, you can mix components that get history from wherever, 
+they will always be tunneled to *state.router.location* !
+
 *Use whatever you like. History will just work as it should.*
 
 ```javascript
@@ -223,17 +232,6 @@ export const RandomThunk = (dispatch) => {
 * Just a simple Router with no more ConnectedRouter!
 * Probably, you already did connect the Redux store with `react-router-redux` or `connected-react-router` (in this case you have only to replace the import!)
 
-# Abstract
-
-While working with *relatively large* projects, it's quite common to use both `redux` and `react-router`.
-
-So you may have components that take location from the store, others that take location from router context, and others from withRouter HOC.
-
-This sometimes could generate sync issues, due to the fact that many components are updated at different times.
-In addition, React shallowCompare rendering optimization will not work as it should.
-
-With `redux-first-history`, you can mix components that get history from wherever, 
-they will always be tunneled to *state.router.location* !
 
 # Options
 
