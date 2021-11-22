@@ -90,7 +90,7 @@ Why? Because there is no synchronization at all! There is only one history: redu
 * Handle Redux Travelling from dev tools (that's nonsense in production, but at the end of the day this decision it's up to you ...)
 
 
-Installation
+## Installation
 -----------
 Using [npm](https://www.npmjs.com/):
 
@@ -99,7 +99,8 @@ Using [npm](https://www.npmjs.com/):
 Or [yarn](https://yarnpkg.com/):
 
     $ yarn add redux-first-history
-Usage
+
+## Usage
 -----
 
 store.js
