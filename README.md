@@ -91,7 +91,6 @@ Why? Because there is no synchronization at all! There is only one history: redu
 
 
 ## Installation
------------
 Using [npm](https://www.npmjs.com/):
 
     $ npm install --save redux-first-history
@@ -101,7 +100,6 @@ Or [yarn](https://yarnpkg.com/):
     $ yarn add redux-first-history
 
 ## Usage
------
 
 store.js
 
