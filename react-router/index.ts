@@ -1,10 +1,21 @@
 import { match, matchPath } from 'react-router';
+import { RouterState } from '../src/reducer';
 
-export const createMatchSelector = (path: string) => {
+interface Options {
+   selectRouterState?: <S>(state: S) => RouterState;
+   routerReducerKey?: string;
+}
+
+export const createMatchSelector = (path: string, options?: Options) => {
    let lastPathname: string | null = null;
    let lastMatch: match<{}> | null = null;
-   return (state: any) => {
-      const { pathname } = state.router.location ?? {};
+   let { selectRouterState, routerReducerKey = 'router' } = options ?? {};
+   if (typeof selectRouterState !== 'function') {
+      selectRouterState = <S>(state: S): RouterState => state[routerReducerKey];
+   }
+   return <S>(state: S): match<{}> | null => {
+      const routerState = selectRouterState!(state);
+      const pathname = routerState?.location?.pathname ?? '';
       if (pathname === lastPathname) {
          return lastMatch;
       }
