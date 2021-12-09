@@ -180,8 +180,6 @@ const App = () => (
     );
 
 export default App;
-
-//...History can now be used via other components using history.push() etc.
 ```
 
 app.js (react-router v6)
@@ -200,8 +198,6 @@ const App = () => (
     );
 
 export default App;
-
-//...History can now be used via other components using navigate()
 ```
 
 
