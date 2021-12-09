@@ -10,14 +10,39 @@ Redux history binding for
 * [`react-router`](https://github.com/remix-run/react-router)
 * [`@reach/router`](https://github.com/reach/router)
 * [`wouter`](https://github.com/molefrog/wouter)
-* mix `react-router` - `@reach/router` - `wouter` in the same app!! Demo : https://wy5qw1125l.codesandbox.io/ (react-router v5) https://uccuw.csb.app/ (react-router v6)
+* Mix `react-router` - `@reach/router` - `wouter` in the same app! See [Demo](#demo).
 
 Compatible with `immer` - `redux-immer` - `redux-immutable`.
 
 :tada: A smaller, faster, optionated, issue-free alternative to 
 [`connected-react-router`](https://github.com/supasate/connected-react-router/issues)
 
+## Table of Contents
+
+- [Main Goal](#main-goal)
+  - [Demo](#demo)
+- [Main Features](#main-features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Options](#options)
+- [Advanced Config](#advanced-config)
+- [Feedback](#feedback)
+- [Credits & Inspiration](#credits--inspiration)
+- [Contributors](#contributors)
+- [License](#license)
+
+
 ## Main Goal
+While working with *relatively large* projects, it's quite common to use both `redux` and `react-router`.
+
+So you may have components that take location from the redux store, others that take location from router context, and others from withRouter HOC.
+
+This can generate sync issues, due to the fact that many components are updated at different times.
+In addition, React shallowCompare rendering optimization will not work as it should.
+
+With `redux-first-history`, you can mix components that get history from wherever, 
+they will always be tunneled to *state.router.location* !
+
 *Use whatever you like. History will just work as it should.*
 
 ```javascript
@@ -40,37 +65,41 @@ this.props.location === state.router.location
 useLocation()[0] === state.router.location.pathname
 ```
 
-You can mix redux, redux-saga, react-router, @reach/router & wouter
+Mix redux, redux-saga, react-router, @reach/router & wouter
 without any synchronization issue! <br>
 Why? Because there is no synchronization at all! There is only one history: reduxHistory!
-* one way data-flow
-* one unique source of truth
-* no more location issue!
+* One way data-flow
+* One unique source of truth
+* No more location issues!
 
 <p align="center">
 <img alt="Edit Redux-First Router Demo" src="https://i.postimg.cc/HnxxYzmz/Untitled_Diagram.png">
 </p>
 
-Demo (react-router v5) : https://wy5qw1125l.codesandbox.io/ src: https://codesandbox.io/s/wy5qw1125l
+## Demo
 
-Demo (react-router v6) : https://uccuw.csb.app/ src: https://codesandbox.io/s/redux-first-history-demo-rr6-uccuw
+- react-router v5: https://wy5qw1125l.codesandbox.io/ 
+  - Source: https://codesandbox.io/s/wy5qw1125l
 
-# Main features
+- react-router v6: https://uccuw.csb.app/
+  - Source: https://codesandbox.io/s/redux-first-history-demo-rr6-uccuw
+
+# Main Features
  
 * 100% one source of truth (store)
-* No syncronization depending on rendering lifecicle (ConnectedRouter)
+* No synchronization depending on rendering lifecycle (ConnectedRouter)
 * No React dependency (we want history to be always in store!)
 * 100% one-way data flow (only dispatch actions!)
-* improve React shallowCompare as there is only one "location"
-* support react-router v4 / v5 / v6
-* support @reach/router 1.x
-* support wouter 2.x
-* support mix react-router, @reach/router & wouter in the same app!
-* fast migration from existing project, with same `LOCATION_CHANGE` and push actions (taken from RRR)
-* handle Redux Travelling from devTools (that's a non sense in production, but at the end of the day this decision it's up to you ...) 
+* Improve React shallowCompare as there is only one "location"
+* Support react-router v4 / v5 / v6
+* Support @reach/router 1.x
+* Support wouter 2.x
+* Support mix react-router, @reach/router & wouter in the same app!
+* Fast migration from an existing project, with the same `LOCATION_CHANGE` and push actions (taken from RRR)
+* Handle Redux Travelling from dev tools (that's nonsense in production, but at the end of the day this decision it's up to you ...)
 
-Installation
------------
+
+## Installation
 Using [npm](https://www.npmjs.com/):
 
     $ npm install --save redux-first-history
@@ -78,8 +107,8 @@ Using [npm](https://www.npmjs.com/):
 Or [yarn](https://yarnpkg.com/):
 
     $ yarn add redux-first-history
-Usage
------
+
+## Usage
 
 store.js
 
@@ -116,7 +145,7 @@ store.js (with @reduxjs/toolkit)
 ```javascript
 import { combineReducers } from "redux";
 import { configureStore } from "@reduxjs/toolkit";
-import { createReduxHistoryContext, reachify } from "redux-first-history";
+import { createReduxHistoryContext } from "redux-first-history";
 import { createBrowserHistory } from "history";
 
 const {
@@ -151,12 +180,14 @@ const App = () => (
     );
 
 export default App;
+
+//...History can now be used via other components using history.push() etc.
 ```
 
 app.js (react-router v6)
 ```javascript
 import React, { Component } from "react";
-import { Provider, connect } from "react-redux";
+import { Provider } from "react-redux";
 import { HistoryRouter as Router } from "redux-first-history/rr6";
 import { store, history } from "./store";
 
@@ -169,23 +200,38 @@ const App = () => (
     );
 
 export default App;
+
+//...History can now be used via other components using navigate()
 ```
 
-* just simple Router with no more ConnectedRouter!
-* use `push` action creator from `redux-first-history` if you need to dispatch location from `saga` or connected components.
-* Probably, you already did it with `react-router-redux` or `connected-react-router` (in this case you have only to replace the import!) 
 
-# Abstract
+saga.js (react-saga)
+```javascript
+import { put } from "redux-saga/effects";
+import { push } from "redux-first-history";
 
-While working with *relatively large* projects, it's quite common to use both `redux` and `react-router`.
+function* randomFunction() {
+  //....
+  yield put(push(YOUR_ROUTE_PATH));
+  //....
+}
+```
 
-So you may have components that take location from store, others that take location from router context, and others from withRouter HOC.
+slice.js (in a Thunk with @reduxjs/toolkit)
+```javascript
+import { push } from "redux-first-history";
 
-This sometimes could generate sync issue, due to the fact that many components are updated at different time.
-In addition, React shallowCompare rendering optimization will not work as it should.
+export const RandomThunk = (dispatch) => {
+  //....
+  dispatch(push(YOUR_ROUTE_PATH));
+  //....
+}
+```
 
-With `redux-first-history`, you can mix components that get history from wherever, 
-they will always be tunneled to *state.router.location* !
+
+* Just a simple Router with no more ConnectedRouter!
+* Probably, you already did connect the Redux store with `react-router-redux` or `connected-react-router` (in this case you have only to replace the import!)
+
 
 # Options
 
@@ -211,9 +257,9 @@ export const createReduxHistoryContext = ({
 |batch |yes | a batch function for batching states updates with history updates. Prevent top-down updates on react : usage `import { unstable_batchedUpdates } from 'react-dom'; `  `batch = unstable_batchedUpdates`
 |reachGlobalHistory |yes | globalHistory object from  `@reach/router` - support imperatively `navigate` of @reach/router  - `import { navigate } from '@reach/router'`  : usage `import { globalHistory } from '@reach/router'; `  `reachGlobalHistory = globalHistory`
 
-# Advanced config
+# Advanced Config
 
-* support "navigate" from @reach/router
+* Support "navigate" from @reach/router
 ```javascript
 import { createReduxHistoryContext, reachify } from "redux-first-history";
 import { createBrowserHistory } from 'history';
@@ -226,7 +272,7 @@ const { createReduxHistory, routerMiddleware, routerReducer } = createReduxHisto
 });
 ```
 
-* React batch updates: top-down batch updates for maximum performance. Fix also some update edge cases.
+* React batch updates: top-down batch updates for maximum performance. Fix also some updated edge cases.
 ```javascript
 import { createReduxHistoryContext, reachify } from "redux-first-history";
 import { createBrowserHistory } from 'history';
@@ -243,15 +289,13 @@ const { createReduxHistory, routerMiddleware, routerReducer } = createReduxHisto
 Let me know what do you think! <br>
 *Enjoy it? Star this project!* :D
 
-# credits & inspiration
+# Credits & Inspiration
  - redux-first-routing
  - react-router-redux
  - connected-react-router
 
-Contributors
-------------
+# Contributors
 See [Contributors](https://github.com/salvoravida/redux-first-history/graphs/contributors).
 
-License
--------
+# License
 [MIT License](https://github.com/salvoravida/redux-first-history/blob/master/LICENSE.md).
