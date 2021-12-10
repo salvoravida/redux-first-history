@@ -186,7 +186,7 @@ app.js (react-router v6)
 ```javascript
 import React, { Component } from "react";
 import { Provider } from "react-redux";
-import { HistoryRouter as Router } from "redux-first-history/rr6";
+import { HistoryRouter as Router } from "react-router-dom";
 import { store, history } from "./store";
 
 const App = () => (
