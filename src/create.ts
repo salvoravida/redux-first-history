@@ -163,6 +163,7 @@ export const createReduxHistoryContext = ({
          goBack: (...args: Parameters<History['goBack']>) => store.dispatch(goBack(...args)),
          // @ts-ignore
          goForward: (...args: Parameters<History['goForward']>) =>
+            // @ts-ignore
             store.dispatch(goForward(...args)),
          // @ts-ignore
          back: (...args: Parameters<History['back']>) => store.dispatch(back(...args)),

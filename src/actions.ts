@@ -27,10 +27,11 @@ function updateLocation<T extends HistoryMethods>(method: T) {
    });
 }
 
-export const push = updateLocation('push');
-export const replace = updateLocation('replace');
-export const go = updateLocation('go');
-export const goBack = updateLocation('goBack');
-export const goForward = updateLocation('goForward');
-export const back = updateLocation('back');
-export const forward = updateLocation('forward');
+export const push: (...args: Parameters<History['push']>) => ReduxAction = updateLocation('push');
+export const replace: (...args: Parameters<History['replace']>) => ReduxAction =
+   updateLocation('replace');
+export const go: (...args: Parameters<History['go']>) => ReduxAction = updateLocation('go');
+export const goBack: () => ReduxAction = updateLocation('goBack');
+export const goForward: () => ReduxAction = updateLocation('goForward');
+export const back: () => ReduxAction = updateLocation('back');
+export const forward: () => ReduxAction = updateLocation('forward');
