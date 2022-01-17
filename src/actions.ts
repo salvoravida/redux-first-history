@@ -35,3 +35,13 @@ export const goBack: () => ReduxAction = updateLocation('goBack');
 export const goForward: () => ReduxAction = updateLocation('goForward');
 export const back: () => ReduxAction = updateLocation('back');
 export const forward: () => ReduxAction = updateLocation('forward');
+
+export type RouterActions = 
+   ReturnType<typeof push> | 
+   ReturnType<typeof replace> |
+   ReturnType<typeof go> | 
+   ReturnType<typeof goBack> | 
+   ReturnType<typeof goForward> | 
+   ReturnType<typeof locationChangeAction> | 
+   ReturnType<typeof back> |
+   ReturnType<typeof forward>;
