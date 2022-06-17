@@ -1,6 +1,6 @@
 // eslint-disable-next-line import/no-unresolved
-import { History as ReachHistory } from '@reach/router';
 import { History } from 'history';
+import { ReachHistory } from './reachify.types';
 
 export const reachify = (reduxHistory: History & { listenObject: boolean }): ReachHistory => {
    let transitioning = false;

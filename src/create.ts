@@ -1,6 +1,6 @@
 import type { History, Location } from 'history';
-import type { History as ReachHistory } from '@reach/router';
 import type { Middleware, Reducer, Store } from 'redux';
+import type { ReachHistory } from './reachify.types';
 import {
    go,
    goBack,
