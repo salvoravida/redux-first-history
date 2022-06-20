@@ -1,5 +1,5 @@
-import { Location, Action, History } from 'history';
-import { AnyAction as ReduxAction } from 'redux';
+import type { Location, Action, History } from 'history';
+import type { AnyAction as ReduxAction } from 'redux';
 
 export const CALL_HISTORY_METHOD = '@@router/CALL_HISTORY_METHOD';
 export const LOCATION_CHANGE = '@@router/LOCATION_CHANGE';
@@ -16,7 +16,7 @@ export type HistoryMethods =
 
 export const locationChangeAction = (location: Location, action: Action) => ({
    type: LOCATION_CHANGE,
-   payload: { location, action },
+   payload: { location, action } as { location: Location; action: Action },
 });
 
 function updateLocation<T extends HistoryMethods>(method: T) {
@@ -36,12 +36,12 @@ export const goForward: () => ReduxAction = updateLocation('goForward');
 export const back: () => ReduxAction = updateLocation('back');
 export const forward: () => ReduxAction = updateLocation('forward');
 
-export type RouterActions = 
-   ReturnType<typeof push> | 
-   ReturnType<typeof replace> |
-   ReturnType<typeof go> | 
-   ReturnType<typeof goBack> | 
-   ReturnType<typeof goForward> | 
-   ReturnType<typeof locationChangeAction> | 
-   ReturnType<typeof back> |
-   ReturnType<typeof forward>;
+export type RouterActions =
+   | ReturnType<typeof push>
+   | ReturnType<typeof replace>
+   | ReturnType<typeof go>
+   | ReturnType<typeof goBack>
+   | ReturnType<typeof goForward>
+   | ReturnType<typeof locationChangeAction>
+   | ReturnType<typeof back>
+   | ReturnType<typeof forward>;
