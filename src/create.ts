@@ -17,7 +17,6 @@ import { createRouterReducer, RouterState } from './reducer';
 export interface IHistoryContextOptions {
    history: History;
    routerReducerKey?: string;
-   oldLocationChangePayload?: boolean;
    reduxTravelling?: boolean;
    showHistoryAction?: boolean;
    selectRouterState?: <S>(state: S) => RouterState;
