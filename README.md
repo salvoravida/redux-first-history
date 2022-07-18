@@ -10,7 +10,8 @@ Redux history binding for
 * [`react-router`](https://github.com/remix-run/react-router)
 * [`@reach/router`](https://github.com/reach/router)
 * [`wouter`](https://github.com/molefrog/wouter)
-* Mix `react-router` - `@reach/router` - `wouter` in the same app! See [Demo](#demo).
+* [`react-location`](https://github.com/tanstack/react-location)
+* Mix `react-router` - `@reach/router` - `wouter` - `react-location` in the same app! See [Demo](#demo).
 
 Compatible with `immer` - `redux-immer` - `redux-immutable`.
 
@@ -65,7 +66,7 @@ this.props.location === state.router.location
 useLocation()[0] === state.router.location.pathname
 ```
 
-Mix redux, redux-saga, react-router, @reach/router & wouter
+Mix redux, redux-saga, react-router, @reach/router, wouter and react-location
 without any synchronization issue! <br>
 Why? Because there is no synchronization at all! There is only one history: reduxHistory!
 * One way data-flow
@@ -78,11 +79,11 @@ Why? Because there is no synchronization at all! There is only one history: redu
 
 ## Demo
 
+- react-router v6: https://wvst19.csb.app/ 
+  - Source: https://codesandbox.io/s/redux-first-history-demo-rr6-forked-wvst19
+
 - react-router v5: https://wy5qw1125l.codesandbox.io/ 
   - Source: https://codesandbox.io/s/wy5qw1125l
-
-- react-router v6: https://uccuw.csb.app/
-  - Source: https://codesandbox.io/s/redux-first-history-demo-rr6-uccuw
 
 # Main Features
  
@@ -91,6 +92,7 @@ Why? Because there is no synchronization at all! There is only one history: redu
 * No React dependency (we want history to be always in store!)
 * 100% one-way data flow (only dispatch actions!)
 * Improve React shallowCompare as there is only one "location"
+* Support react-location 3.x
 * Support react-router v4 / v5 / v6
 * Support @reach/router 1.x
 * Support wouter 2.x
