@@ -15,14 +15,14 @@ export type HistoryMethods =
    | 'forward';
 
 export const locationChangeAction = (location: Location, action: Action) => ({
-   type: LOCATION_CHANGE,
+   type: LOCATION_CHANGE as typeof LOCATION_CHANGE,
    payload: { location, action } as { location: Location; action: Action },
 });
 
 function updateLocation<T extends HistoryMethods>(method: T) {
    // @ts-ignore
    return (...args: Parameters<History[T]>): ReduxAction => ({
-      type: CALL_HISTORY_METHOD,
+      type: CALL_HISTORY_METHOD as typeof CALL_HISTORY_METHOD,
       payload: { method, args },
    });
 }
