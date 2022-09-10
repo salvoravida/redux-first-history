@@ -249,4 +249,74 @@ describe('RouterMiddleware history v5', () => {
          expect(fakeHistory.forward).toHaveBeenCalledTimes(0);
       });
    });
+
+   describe('with basename', () => {
+      let routerMiddleware;
+      let nextDispatch;
+      let fakeHistory;
+
+      beforeEach(() => {
+         fakeHistory = {
+            push: jest.fn(() => {}),
+            replace: jest.fn(() => {}),
+            go: jest.fn(() => {}),
+            back: jest.fn(() => {}),
+            forward: jest.fn(() => {}),
+         } as unknown as History;
+         routerMiddleware = createRouterMiddleware({
+            history: fakeHistory,
+            showHistoryAction: false,
+            basename: '/page',
+         });
+         nextDispatch = jest.fn(() => {});
+      });
+
+      it('should handle push action partial path', () => {
+         routerMiddleware()(nextDispatch)(push('/path'));
+         expect(nextDispatch).toHaveBeenCalledTimes(0);
+         expect(fakeHistory.push).toHaveBeenCalledTimes(1);
+         expect(fakeHistory.push).toHaveBeenCalledWith('/page/path');
+
+         routerMiddleware()(nextDispatch)(push({ pathname: '/path' }));
+         expect(nextDispatch).toHaveBeenCalledTimes(0);
+         expect(fakeHistory.push).toHaveBeenCalledTimes(2);
+         expect(fakeHistory.push).toHaveBeenCalledWith({ pathname: '/page/path' });
+      });
+
+      it('should handle replace action partial path', () => {
+         routerMiddleware()(nextDispatch)(replace('/path'));
+         expect(nextDispatch).toHaveBeenCalledTimes(0);
+         expect(fakeHistory.replace).toHaveBeenCalledTimes(1);
+         expect(fakeHistory.replace).toHaveBeenCalledWith('/page/path');
+
+         routerMiddleware()(nextDispatch)(replace({ pathname: '/path' }));
+         expect(nextDispatch).toHaveBeenCalledTimes(0);
+         expect(fakeHistory.replace).toHaveBeenCalledTimes(2);
+         expect(fakeHistory.replace).toHaveBeenCalledWith({ pathname: '/page/path' });
+      });
+
+      it('should handle push action full path', () => {
+         routerMiddleware()(nextDispatch)(push('/page/path'));
+         expect(nextDispatch).toHaveBeenCalledTimes(0);
+         expect(fakeHistory.push).toHaveBeenCalledTimes(1);
+         expect(fakeHistory.push).toHaveBeenCalledWith('/page/path');
+
+         routerMiddleware()(nextDispatch)(push({ pathname: '/page/path' }));
+         expect(nextDispatch).toHaveBeenCalledTimes(0);
+         expect(fakeHistory.push).toHaveBeenCalledTimes(2);
+         expect(fakeHistory.push).toHaveBeenCalledWith({ pathname: '/page/path' });
+      });
+
+      it('should handle replace action full path', () => {
+         routerMiddleware()(nextDispatch)(replace('/page/path'));
+         expect(nextDispatch).toHaveBeenCalledTimes(0);
+         expect(fakeHistory.replace).toHaveBeenCalledTimes(1);
+         expect(fakeHistory.replace).toHaveBeenCalledWith('/page/path');
+
+         routerMiddleware()(nextDispatch)(replace({ pathname: '/page/path' }));
+         expect(nextDispatch).toHaveBeenCalledTimes(0);
+         expect(fakeHistory.replace).toHaveBeenCalledTimes(2);
+         expect(fakeHistory.replace).toHaveBeenCalledWith({ pathname: '/page/path' });
+      });
+   });
 });

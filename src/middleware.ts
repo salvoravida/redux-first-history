@@ -6,10 +6,25 @@ import { CALL_HISTORY_METHOD, HistoryMethods } from './actions';
 type CreateRouterMiddlewareArgs = {
    history: History;
    showHistoryAction: boolean;
+   basename?: string;
 };
 
+function appendBasename(location: string | Location, basename: string): string | Location {
+   if (typeof location === 'string' && !location.startsWith(basename)) {
+      return basename + location;
+   }
+   if (
+      typeof location === 'object' &&
+      !!location.pathname &&
+      !location.pathname.startsWith(basename)
+   ) {
+      return { ...location, pathname: basename + location.pathname };
+   }
+   return location;
+}
+
 export const createRouterMiddleware =
-   ({ history, showHistoryAction }: CreateRouterMiddlewareArgs): Middleware =>
+   ({ history, showHistoryAction, basename }: CreateRouterMiddlewareArgs): Middleware =>
    () =>
    (next: Dispatch) =>
    (action: ReduxAction) => {
@@ -22,12 +37,28 @@ export const createRouterMiddleware =
 
       // eslint-disable-next-line default-case
       switch (method) {
-         case 'push':
-            history.push(...(args as Parameters<History['push']>));
+         case 'push': {
+            let callArgs = args;
+            if (basename && args.length > 0) {
+               callArgs = [
+                  appendBasename(args[0] as string | Location, basename),
+                  ...args.slice(1),
+               ];
+            }
+            history.push(...(callArgs as Parameters<History['push']>));
             break;
-         case 'replace':
-            history.replace(...(args as Parameters<History['replace']>));
+         }
+         case 'replace': {
+            let callArgs = args;
+            if (basename && args.length > 0) {
+               callArgs = [
+                  appendBasename(args[0] as string | Location, basename),
+                  ...args.slice(1),
+               ];
+            }
+            history.replace(...(callArgs as Parameters<History['replace']>));
             break;
+         }
          case 'go':
             history.go(...(args as Parameters<History['go']>));
             break;

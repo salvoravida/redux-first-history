@@ -23,6 +23,7 @@ export interface IHistoryContextOptions {
    savePreviousLocations?: number;
    batch?: (callback: () => void) => void;
    reachGlobalHistory?: ReachHistory;
+   basename?: string;
 }
 
 export interface IHistoryContext {
@@ -40,6 +41,7 @@ export const createReduxHistoryContext = ({
    savePreviousLocations = 0,
    batch,
    reachGlobalHistory,
+   basename,
 }: IHistoryContextOptions): IHistoryContext => {
    let listenObject = false;
 
@@ -59,8 +61,8 @@ export const createReduxHistoryContext = ({
       selectRouterState = state => state[routerReducerKey];
    }
 
-   const routerReducer = createRouterReducer({ savePreviousLocations });
-   const routerMiddleware = createRouterMiddleware({ history, showHistoryAction });
+   const routerReducer = createRouterReducer({ savePreviousLocations, basename });
+   const routerMiddleware = createRouterMiddleware({ history, showHistoryAction, basename });
 
    /** ******************************************  REDUX TRAVELLING  ************************************************** */
 

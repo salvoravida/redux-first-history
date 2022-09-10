@@ -6,12 +6,20 @@ export type RouterState = {
    location?: Location | null;
    action?: Action | null;
    previousLocations?: { location?: Location | null; action?: Action | null }[];
+   basename?: string;
 };
 
-export const createRouterReducer = ({ savePreviousLocations = 0 }): Reducer<RouterState> => {
+export const createRouterReducer = ({
+   savePreviousLocations = 0,
+   basename,
+}: {
+   savePreviousLocations?: number;
+   basename?: string;
+}): Reducer<RouterState> => {
    const initialState: RouterState = {
       location: null,
       action: null,
+      basename,
    };
 
    // eslint-disable-next-line no-restricted-globals
