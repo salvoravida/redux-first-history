@@ -32,6 +32,7 @@ export interface IHistoryContext {
    routerReducer: Reducer<RouterState>;
 }
 
+let registeredCallback: unknown[] = [];
 export const createReduxHistoryContext = ({
    history,
    routerReducerKey = 'router',
@@ -51,7 +52,7 @@ export const createReduxHistoryContext = ({
 
    if (typeof batch !== 'function') {
       batch = fn => {
-         fn();
+         fn.bind({ registeredCallback })();
       };
    }
 
@@ -86,8 +87,6 @@ export const createReduxHistoryContext = ({
    /** ******************************************  REDUX FIRST HISTORY   *********************************************** */
 
    const createReduxHistory = (store: Store): History & { listenObject: boolean } => {
-      let registeredCallback: unknown[] = [];
-
       // init location store
       store.dispatch(locationChangeAction(history.location, history.action));
 
