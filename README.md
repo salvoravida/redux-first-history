@@ -160,7 +160,7 @@ export const store = configureStore({
   reducer: combineReducers({
     router: routerReducer
   }),
-  middleware: [routerMiddleware]
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(routerMiddleware),
 });
 
 export const history = createReduxHistory(store);
