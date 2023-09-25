@@ -36,12 +36,16 @@ function updateLocation<T extends HistoryMethods>(method: T) {
    });
 }
 
-export const push: (
-   ...args: Parameters<History['push']>
-) => CallHistoryMethodAction<Parameters<History['push']>> = updateLocation('push');
-export const replace: (
-   ...args: Parameters<History['replace']>
-) => CallHistoryMethodAction<Parameters<History['replace']>> = updateLocation('replace');
+export function push<S = History.LocationState>(
+   ...args: Parameters<History<S>['push']>
+): CallHistoryMethodAction<Parameters<History['push']>> {
+   return updateLocation('push')(...args);
+}
+export function replace<S = History.LocationState>(
+   ...args: Parameters<History<S>['replace']>
+): CallHistoryMethodAction<Parameters<History['replace']>> {
+   return updateLocation('replace')(...args);
+}
 export const go: (
    ...args: Parameters<History['go']>
 ) => CallHistoryMethodAction<Parameters<History['go']>> = updateLocation('go');
