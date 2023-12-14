@@ -26,11 +26,13 @@ function appendBasename(location: string | Location, basename: string): string |
 export const createRouterMiddleware =
    ({ history, showHistoryAction, basename }: CreateRouterMiddlewareArgs): Middleware =>
    () =>
+   // @ts-ignore
    (next: Dispatch) =>
    (action: ReduxAction) => {
       if (action.type !== CALL_HISTORY_METHOD) {
          return next(action);
       }
+      // @ts-ignore
       const method = action.payload.method as HistoryMethods;
       // @ts-ignore
       const args = action.payload.args as Parameters<History[HistoryMethods]>;

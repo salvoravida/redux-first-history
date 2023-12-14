@@ -1,4 +1,5 @@
 import type { Location, Action, History } from 'history';
+import type { AnyAction } from 'redux';
 
 export const CALL_HISTORY_METHOD = '@@router/CALL_HISTORY_METHOD';
 export const LOCATION_CHANGE = '@@router/LOCATION_CHANGE';
@@ -23,7 +24,7 @@ export interface LocationActionPayload<A = unknown[]> {
    args?: A;
 }
 
-export interface CallHistoryMethodAction<A = unknown[]> {
+export interface CallHistoryMethodAction<A = unknown[]> extends AnyAction {
    type: typeof CALL_HISTORY_METHOD;
    payload: LocationActionPayload<A>;
 }

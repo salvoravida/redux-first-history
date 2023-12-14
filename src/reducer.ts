@@ -28,7 +28,10 @@ export const createRouterReducer = ({
 
    return (state = initialState, { type, payload } = {} as AnyAction) => {
       if (type === LOCATION_CHANGE) {
-         const { location, action } = payload || {};
+         const { location, action } = (payload || {}) as {
+            location?: Location | null;
+            action?: Action | null;
+         };
          const previousLocations = numLocationToTrack // @ts-ignore
             ? [{ location, action }, ...state.previousLocations.slice(0, numLocationToTrack)]
             : undefined;
